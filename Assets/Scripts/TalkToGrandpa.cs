@@ -13,6 +13,7 @@ public class TalkToGrandpa : MonoBehaviour {
 
 	public float spawnTime = 0.5f;
 	const float MIN_DIST = 5.0f;
+	const float WIN_NUM_SEEDS = 8;
 	private bool cutscene1; 
 
 	// Use this for initialization
@@ -98,7 +99,7 @@ public class TalkToGrandpa : MonoBehaviour {
 			Vector3 seedPlace = seeds [i].transform.position;
 			if (Vector3.Distance (transform.position, seedPlace) <= MIN_DIST) {
 				winCounter++;
-				if (winCounter >= 7) {
+				if (winCounter >= WIN_NUM_SEEDS) {
 					YouWin ();
 				}
 			}

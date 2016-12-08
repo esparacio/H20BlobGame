@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scripts\IceCircle.cs" />
      <Compile Include="Assets\Scripts\MillBlade.cs" />
      <Compile Include="Assets\Scripts\MovieCamera.cs" />
+     <Compile Include="Assets\Scripts\Mushroom.cs" />
      <Compile Include="Assets\Scripts\PlantSunFlower.cs" />
      <Compile Include="Assets\Scripts\PowerState.cs" />
      <Compile Include="Assets\Scripts\Seed.cs" />
