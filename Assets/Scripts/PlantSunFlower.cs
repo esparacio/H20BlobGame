@@ -22,7 +22,7 @@ public class PlantSunFlower : MonoBehaviour {
 	Temperature temp;
 
 	//constants
-	const float MIN_DIST = 5.0f;
+	const float MIN_DIST = 15.0f;
 	const float GRAND_DIST = 20.0f;
 
 
@@ -66,14 +66,14 @@ public class PlantSunFlower : MonoBehaviour {
 					if (Vector3.Distance (transform.position, waterPlacePos) <= MIN_DIST) {
 						Destroy (waterPlaces [i]);
 						GameObject newPlace = Instantiate (vaporPlacePrefab) as GameObject;
-						Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 3);
+						Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 5);
 						newPlace.transform.position = blobPosition;
 						isVapor = true;
 					} 
 				}
 				if (!isVapor) {
 					GameObject newPlace = Instantiate (waterPlacePrefab) as GameObject;
-					Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 3);
+					Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 5);
 					newPlace.transform.position = blobPosition;
 				}
 			}

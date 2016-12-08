@@ -12,6 +12,8 @@ Written by: Elena Sparacio
 public class Blobrarian : MonoBehaviour {
 
 	private bool cutscene;
+	//location for movie camera - hardcoded
+	private Vector3 sceneLocation = new Vector3 (-59, 5, -50);
 
 	// Use this for initialization
 	void Start () {
@@ -39,8 +41,8 @@ public class Blobrarian : MonoBehaviour {
 			//get secondary camera
 			Camera movieCam = GameObject.Find ("SecondaryCamera").GetComponent<Camera> ();
 
-			//set location? 
-			movieCam.transform.position = new Vector3 (-59, 5, -50);
+			//set location for cutscene
+			movieCam.transform.position = sceneLocation;
 
 			//set camera view
 			MovieCamera cameraScript = GameObject.Find ("SecondaryCamera").GetComponent<MovieCamera> ();

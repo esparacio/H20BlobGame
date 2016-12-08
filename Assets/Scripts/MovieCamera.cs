@@ -309,7 +309,7 @@ public class MovieCamera : MonoBehaviour {
 		messages [0] = "You can plant seeds by pressing 'shift' to gain more powers.";
 		messages [1] = "One planted seed will give you water powers in an area.";
 		messages [2] = "Two planted seeds will give you vapor powers in an area.";
-		messages [3] = "Once you collect all of the seeds, plant them around Grandblob to warm him.";
+		messages [3] = "Once you collect all of the seeds, \n plant them around Grandblob to warm him.";
 
 		//create times and colors arrays
 		int[] times = new int[4];

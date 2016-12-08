@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿
+
+using UnityEngine;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +19,11 @@ public class BlobPlayer : MonoBehaviour {
 	private bool waterIsActive;
 
 	//@author Patrick Lathan
+	public AudioClip iceSound;
+	public AudioClip waterSound;
+	public AudioClip jumpSound;
+	private AudioSource source;
+
 	private const float SPEED = 6.0f;
 	private const float JUMPSPEED = 0.5f;
 	private const float FRICTION = .5f;
@@ -64,6 +71,8 @@ public class BlobPlayer : MonoBehaviour {
 		particleSystem.Stop();
 
 		//@author Patrick Lathan
+		source = GetComponent<AudioSource>();
+
 		charController = GetComponent<CharacterController>();
 
 		//Create dictionary of states to be accessed by SetState()
@@ -117,6 +126,7 @@ public class BlobPlayer : MonoBehaviour {
 
 		if (charController.isGrounded) {
 			if (Input.GetButtonDown ("Jump")) {
+				source.PlayOneShot(jumpSound);
 				ySpeed = JUMPSPEED;
 			} else {
 				ySpeed = 0;
@@ -170,6 +180,41 @@ public class BlobPlayer : MonoBehaviour {
 			//  Now use this vector and the hit normal, to find the other vector moving up and down the hit surface
 			groundSlopeDir = Vector3.Cross(temp, hit.normal);
 		}
+
+		// Now that's all fine and dandy, but on edges, corners, etc, we get angle values that we don't want.
+		// To correct for this, let's do some raycasts. You could do more raycasts, and check for more
+		// edge cases here. There are lots of situations that could pop up, so test and see what gives you trouble.
+		RaycastHit slopeHit1;
+		RaycastHit slopeHit2;
+
+		// FIRST RAYCAST
+		if (Physics.Raycast(origin + rayOriginOffset1, Vector3.down, out slopeHit1, raycastLength)) {
+			// Debug line to first hit point
+			if (showDebug) {
+				Debug.DrawLine(origin + rayOriginOffset1, slopeHit1.point, Color.red);
+			}
+			// Get angle of slope on hit normal
+			float angleOne = Vector3.Angle(slopeHit1.normal, Vector3.up);
+
+			// 2ND RAYCAST
+			if (Physics.Raycast(origin + rayOriginOffset2, Vector3.down, out slopeHit2, raycastLength)) {
+				// Debug line to second hit point
+				if (showDebug) {
+					Debug.DrawLine(origin + rayOriginOffset2, slopeHit2.point, Color.red);
+				}
+				// Get angle of slope of these two hit points.
+				float angleTwo = Vector3.Angle(slopeHit2.normal, Vector3.up);
+				// 3 collision points: Take the MEDIAN by sorting array and grabbing middle.
+				float[] tempArray = new float[] { groundSlopeAngle, angleOne, angleTwo };
+				Array.Sort(tempArray);
+				groundSlopeAngle = tempArray[1];
+			} else {
+				// 2 collision points (sphere and first raycast): AVERAGE the two
+				float average = (groundSlopeAngle + angleOne) / 2;
+				groundSlopeAngle = average;
+			}
+		}
+		//Debug.Log(groundSlopeAngle);
 	}
 
 	//@author Elena Sparacio
@@ -188,6 +233,7 @@ public class BlobPlayer : MonoBehaviour {
 				}
 
 				GameObject iceCircle = Instantiate(player.icePrefab) as GameObject;
+				player.source.PlayOneShot(player.iceSound);
 				GameObject blob = GameObject.Find("ActualBlob");
 
 				Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 2);
@@ -210,6 +256,7 @@ public class BlobPlayer : MonoBehaviour {
 
 				//Allow jumping in midair
 				if (Input.GetButtonDown("Jump")) {
+					player.source.PlayOneShot(player.jumpSound);
 					player.ySpeed = JUMPSPEED;
 				}
 			} else {
@@ -235,6 +282,7 @@ public class BlobPlayer : MonoBehaviour {
 				//if the water particle system is not already on, turn it on
 				if (!player.particleSystem.isPlaying) {
 					player.particleSystem.Play();
+					player.source.PlayOneShot(player.waterSound);
 				}
 			} else {
 				player.timeLeft -= Time.deltaTime;
@@ -242,6 +290,7 @@ public class BlobPlayer : MonoBehaviour {
 				if (player.timeLeft < 0 && player.particleSystem.isPlaying) {
 					player.particleSystem.Stop(); // gameObject.GetComponent<ParticleSystem>().enableEmission = false; maybe use this, but its deprecated
 					// above source is from http://answers.unity3d.com/questions/37875/turning-the-particle-system-on-and-off.html
+					player.source.Stop();
 				}
 			}
 		}

@@ -20,14 +20,12 @@ public class UI : MonoBehaviour {
 	//bool that is true if the user chose to skip the cutscene
 	private bool isSkip;
 	private bool isEnd;
-	private Vector3 playerSpawn;
 
 
 
 	// Use this for initialization - sets the center message game object
 	void Start () {
 
-		playerSpawn = GameObject.Find ("ActualBlob").transform.position;
 		centerMessage = GameObject.Find ("CenterMessage");
 		centerText = centerMessage.GetComponent<Text>();
 		isSkip = false;
@@ -97,15 +95,6 @@ public class UI : MonoBehaviour {
 
 	}
 
-	//You Died activates if the player dies. It displays a message and does not let the player move
-	public void YouDied(){
-
-		centerText.text = "...you... Died...";
-		Cursor.lockState = CursorLockMode.Locked;
-		Time.timeScale = 0;
-
-	}
-
 	//Dialog is a method that displays a string at the lower part of the screen
 	public void Dialog(string message){
 
@@ -113,19 +102,11 @@ public class UI : MonoBehaviour {
 
 		//if you killed Grandblob (wow you monster) 
 		if (message == "It is too cold! Oh noooo!") {
-			StartCoroutine(GrandBlobDie ());
+			GameControl controller = GameObject.Find ("Controller").GetComponent<GameControl> ();
+			StartCoroutine(controller.GrandBlobDie ());
 		} else {
 			StartCoroutine (Wait (5));
 		}
-
-	}
-
-	//GrandBlobDie is activated if you try to freeze your Grandblob to death 
-	public IEnumerator GrandBlobDie(){
-
-		yield return new WaitForSeconds(3);
-		GameObject grandblob = GameObject.Find ("grandpa");
-		Destroy (grandblob.gameObject);
 
 	}
 
@@ -155,14 +136,5 @@ public class UI : MonoBehaviour {
 		uiText.text = "Press 'c' to show controls";
 
 	}
-
-	//you Win activates once you have finished the game - this will probably change
-	public void YouWin(){
-
-		centerText.text = "You found all the seeds! You have saved GrandBlob!";
-		Cursor.lockState = CursorLockMode.None;
-		Time.timeScale = 0;
-
-	}
-
+		
 }

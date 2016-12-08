@@ -35,13 +35,8 @@ public class Water : MonoBehaviour {
 	public IEnumerator YouDrowned() {
 		
 		yield return new WaitForSeconds(1);
-		GameObject blob = GameObject.Find ("NewBlob");
-		MeshRenderer renderer = blob.GetComponent<MeshRenderer>();
-		renderer.enabled=false;
-
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-		uiScript.YouDied ();
+		GameControl controller = GameObject.Find ("Controller").GetComponent<GameControl> ();
+		controller.YouDied ();
 
 	}
 }

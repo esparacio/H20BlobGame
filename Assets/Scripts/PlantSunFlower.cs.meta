@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: bd13d80ecbf114f499da40b578fde488
-timeCreated: 1478730469
+timeCreated: 1481203920
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - seedPrefab: {fileID: 1000010372430258, guid: 4ad8eb0136e3644b7ace927d50733af1,
+      type: 2}
+  - waterPlacePrefab: {fileID: 1000011606784668, guid: 4623440fbbf2f495c8c9dd5ca715c2b1,
+      type: 2}
+  - vaporPlacePrefab: {fileID: 1000011611029408, guid: 92d6ceb06c1794d5ebccd674bfa5c1ec,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
