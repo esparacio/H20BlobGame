@@ -224,6 +224,7 @@ public class BlobPlayer : MonoBehaviour {
 		}
 
 		public override void Update() {
+
 			if (Input.GetButtonDown("IcePower") && player.charController.isGrounded) {
 				GameObject[] iceCircles = GameObject.FindGameObjectsWithTag("ice");
 
@@ -250,6 +251,7 @@ public class BlobPlayer : MonoBehaviour {
 		}
 
 		public override void Update() {
+
 			if (Input.GetButton("VaporPower")) {
 				//Lessen gravity
 				player.gravity = VAPORGRAVITY;
