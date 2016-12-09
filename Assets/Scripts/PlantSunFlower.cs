@@ -12,18 +12,23 @@ Written by: Nathan Young and Elena Sparacio
 */
 public class PlantSunFlower : MonoBehaviour {
 
-	//variables including default number of seeds
+	//variables including for all prefabs
 	public GameObject seedPrefab;
 	public GameObject waterPlacePrefab;
 	public GameObject vaporPlacePrefab;
+
+	//variables for the number of seeds and if the seed collected is the first seed
 	private int numSeeds;
 	private bool isFirst;
+
+	//variables for scripts
 	BlobPlayer blobPlayer;
 	SeedCounter seedCounter;
 
 	//constants
 	const float MIN_DIST = 15.0f;
 	const float GRAND_DIST = 20.0f;
+	const int STARTING_NUM = 0;
 
 
 	// Use this for initialization
@@ -33,9 +38,8 @@ public class PlantSunFlower : MonoBehaviour {
 		blobPlayer = actualBlob.GetComponent<BlobPlayer> ();
 		seedCounter = GameObject.Find ("SeedText").GetComponent<SeedCounter> ();
 
-		//DEBUG
-		numSeeds = 10;
-		seedCounter.updateCounter (10);
+		numSeeds = STARTING_NUM;
+		seedCounter.updateCounter (STARTING_NUM);
 		isFirst = true;
 
 	}
@@ -46,7 +50,6 @@ public class PlantSunFlower : MonoBehaviour {
 		//if the player is allowed to plant a seed, put it down in front of the player
 		if(Input.GetButtonDown("PlantSunFlower") && numSeeds>0)
 		{
-
 			GameObject blob = GameObject.Find ("ActualBlob");
 
 			//don't allow them to plant a water/vapor place on grandblob... 
@@ -83,9 +86,6 @@ public class PlantSunFlower : MonoBehaviour {
 
 			numSeeds--;
 			seedCounter.updateCounter (-1);
-			print (numSeeds);
-
-
 		}
 
 	}
@@ -94,39 +94,24 @@ public class PlantSunFlower : MonoBehaviour {
 	//they currently have. If it is the first collected seed, it plays instructions
 	public void GotASeed(GameObject aSeed){
 
-
+	
 		if (aSeed.tag == "waterSeed") {
-			//destroy the things around the seed 
-			GameObject[] waterPlaces = GameObject.FindGameObjectsWithTag ("waterPlace");
-			for (var i = 0; i < waterPlaces.Length; i++) {
-				Vector3 waterPlacePos = waterPlaces [i].transform.position;
-				if (Vector3.Distance (transform.position, waterPlacePos) <= MIN_DIST) {
-					Destroy (waterPlaces [i]);
-					//if the water place is destroyed, on trigger exit is NOT called, but we need to
-					//change the power back
-					blobPlayer.SetState ("ice");
-					//give the player their seed back
-					numSeeds++;
-					seedCounter.updateCounter (1);
-					print (numSeeds);
-				}
-			}
+			Destroy (aSeed.transform.parent.gameObject);
+			//if the water place is destroyed, on trigger exit is NOT called, but we need to
+			//change the power back
+			blobPlayer.SetState ("ice");
+			//give the player their seed back
+			numSeeds++;
+			seedCounter.updateCounter (1);
+	
 		} else if (aSeed.tag == "vaporSeed") {
-			//destroy the things around the seed 
-			GameObject[] vaporPlaces = GameObject.FindGameObjectsWithTag ("vaporPlace");
-			for (var i = 0; i < vaporPlaces.Length; i++) {
-				Vector3 waterPlacePos = vaporPlaces [i].transform.position;
-				if (Vector3.Distance (transform.position, waterPlacePos) <= MIN_DIST) {
-					Destroy (vaporPlaces [i]);
-					//if the vapor place is destroyed, on trigger exit is NOT called, but we need to
-					//change the power back
-					blobPlayer.SetState ("ice");
-					numSeeds+=2;
-					seedCounter.updateCounter (2);
-					print (numSeeds);
-
-				}
-			}
+			Destroy (aSeed.transform.parent.gameObject);
+			//if the vapor place is destroyed, on trigger exit is NOT called, but we need to
+			//change the power back
+			blobPlayer.SetState ("ice");
+			numSeeds+=2;
+			seedCounter.updateCounter (2);
+			print (numSeeds);
 		}
 
 		if (isFirst) {
