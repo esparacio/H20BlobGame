@@ -1,6 +1,5 @@
-﻿
-
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 
@@ -99,6 +98,7 @@ public class BlobPlayer : MonoBehaviour {
 	//@author Patrick Lathan
 	public void SetState(string powerString) {
 		currentState = states[powerString];
+		currentState.Awake ();
 	}
 
 	//@author Patrick Lathan
@@ -223,6 +223,15 @@ public class BlobPlayer : MonoBehaviour {
 		public IceState(BlobPlayer player) : base(player) {
 		}
 
+		public override void Awake() {
+
+			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
+			lowText.text = "Current Power: ICE";
+			//stop water particles 
+			player.particleSystem.Stop(); 
+			player.source.Stop();
+		}
+
 		public override void Update() {
 
 			if (Input.GetButtonDown("IcePower") && player.charController.isGrounded) {
@@ -250,6 +259,15 @@ public class BlobPlayer : MonoBehaviour {
 		public VaporState(BlobPlayer player) : base(player) {
 		}
 
+		public override void Awake() {
+			
+			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
+			lowText.text = "Current Power: VAPOR";
+			//stop water particles 
+			player.particleSystem.Stop(); 
+			player.source.Stop();
+		}
+
 		public override void Update() {
 
 			if (Input.GetButton("VaporPower")) {
@@ -273,6 +291,11 @@ public class BlobPlayer : MonoBehaviour {
 	//@author Nathan Young
 	class WaterState : PowerState {
 		public WaterState(BlobPlayer player) : base(player) {
+		}
+
+		public override void Awake() {
+			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
+			lowText.text = "Current Power: WATER";
 		}
 
 		public override void Update() {

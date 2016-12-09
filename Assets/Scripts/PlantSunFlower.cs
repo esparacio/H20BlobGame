@@ -28,7 +28,8 @@ public class PlantSunFlower : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		numSeeds = 0;
+		//DEBUG
+		numSeeds = 10;
 		isFirst = true;
 
 		GameObject actualBlob = GameObject.Find ("ActualBlob");

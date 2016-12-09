@@ -12,14 +12,12 @@ By: Nathan Young and Elena Sparacio
 public class WaterPlace : MonoBehaviour {
 
 	BlobPlayer blobPlayer;
-	Temperature temp;
 
 	// Use this for initialization
 	void Start () {
 		
 		GameObject actualBlob = GameObject.Find ("ActualBlob");
 		blobPlayer = actualBlob.GetComponent<BlobPlayer> ();
-		temp = GameObject.Find ("Temperature").GetComponent<Temperature> ();
 
 	}
 
@@ -32,7 +30,6 @@ public class WaterPlace : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 	 	if (other.tag == "Player") {
 			blobPlayer.SetState ("water");
-			temp.setTemp (1);
 	 		}
 	 	}
 	
@@ -40,7 +37,6 @@ public class WaterPlace : MonoBehaviour {
 	void OnTriggerExit(Collider other){
 	 		if (other.tag == "Player") {
 			    blobPlayer.SetState ("ice");
-				temp.setTemp (0);
 
 	 		}
 	 	}

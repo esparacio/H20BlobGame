@@ -14,14 +14,12 @@ public class VaporPlace : MonoBehaviour {
 	//image credits: https://upload.wikimedia.org/wikipedia/commons/c/c4/Fire_Texture_01.png
 
 	BlobPlayer blobPlayer;
-	Temperature temp;
 
 	// Use this for initialization
 	void Start () {
 
 		GameObject actualBlob = GameObject.Find ("ActualBlob");
 		blobPlayer = actualBlob.GetComponent<BlobPlayer> ();
-		temp = GameObject.Find ("Temperature").GetComponent<Temperature> ();
 	}
 
 	// Update is called once per frame
@@ -33,7 +31,6 @@ public class VaporPlace : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.tag == "Player") {
 			blobPlayer.SetState ("vapor");
-			temp.setTemp (2);
 		}
 	}
 
@@ -41,7 +38,6 @@ public class VaporPlace : MonoBehaviour {
 	void OnTriggerExit(Collider other){
 		if (other.tag == "Player") {
 			blobPlayer.SetState ("ice");
-			temp.setTemp (0);
 
 		}
 	}

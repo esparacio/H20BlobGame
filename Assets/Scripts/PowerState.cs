@@ -10,6 +10,8 @@ public abstract class PowerState {
 		player = playerObj;
 	}
 
+	public abstract void Awake ();
+
 	public abstract void Update();
 
 }
