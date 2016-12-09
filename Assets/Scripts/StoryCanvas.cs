@@ -34,10 +34,9 @@ public class StoryCanvas : MonoBehaviour {
 		//assign boolean values
 		isSkip = false;
 		isEnd = false;
-		//clear dialog boxes for now and hide low canvas
+		//clear dialog boxes for now 
 		GameObject.Find("Conversation1").transform.localScale = new Vector3(0,0,0);
 		GameObject.Find("Conversation2").transform.localScale = new Vector3(0,0,0);
-		GameObject.Find ("LowCanvas").GetComponent<Text> ().text = "";
 	
 	}
 	
