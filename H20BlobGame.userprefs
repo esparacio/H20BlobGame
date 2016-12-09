@@ -2,9 +2,11 @@
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/PlantSunFlower.cs">
     <Files>
-      <File FileName="Assets/Scripts/BlobPlayer.cs" Line="87" Column="14" />
-      <File FileName="Assets/Scripts/PlantSunFlower.cs" Line="32" Column="15" />
-      <File FileName="Assets/Scripts/WaterPlace.cs" Line="41" Column="33" />
+      <File FileName="Assets/Scripts/StoryCanvas.cs" Line="35" Column="18" />
+      <File FileName="Assets/Scripts/MovieCamera.cs" Line="279" Column="53" />
+      <File FileName="Assets/Scripts/PlantSunFlower.cs" Line="31" Column="28" />
+      <File FileName="Assets/Scripts/SeedCounter.cs" Line="10" Column="13" />
+      <File FileName="Assets/Scripts/TalkToGrandpa.cs" Line="26" Column="76" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
