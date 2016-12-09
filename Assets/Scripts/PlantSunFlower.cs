@@ -18,7 +18,8 @@ public class PlantSunFlower : MonoBehaviour {
 	public GameObject vaporPlacePrefab;
 	private int numSeeds;
 	private bool isFirst;
-	BlobPlayer blobPlayer;	
+	BlobPlayer blobPlayer;
+	SeedCounter seedCounter;
 
 	//constants
 	const float MIN_DIST = 15.0f;
@@ -28,12 +29,14 @@ public class PlantSunFlower : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		//DEBUG
-		numSeeds = 0;
-		isFirst = true;
-
 		GameObject actualBlob = GameObject.Find ("ActualBlob");
 		blobPlayer = actualBlob.GetComponent<BlobPlayer> ();
+		seedCounter = GameObject.Find ("SeedText").GetComponent<SeedCounter> ();
+
+		//DEBUG
+		numSeeds = 10;
+		seedCounter.updateCounter (10);
+		isFirst = true;
 
 	}
 
@@ -79,6 +82,7 @@ public class PlantSunFlower : MonoBehaviour {
 			}
 
 			numSeeds--;
+			seedCounter.updateCounter (-1);
 			print (numSeeds);
 
 
@@ -103,6 +107,7 @@ public class PlantSunFlower : MonoBehaviour {
 					blobPlayer.SetState ("ice");
 					//give the player their seed back
 					numSeeds++;
+					seedCounter.updateCounter (1);
 					print (numSeeds);
 				}
 			}
@@ -117,6 +122,7 @@ public class PlantSunFlower : MonoBehaviour {
 					//change the power back
 					blobPlayer.SetState ("ice");
 					numSeeds+=2;
+					seedCounter.updateCounter (2);
 					print (numSeeds);
 
 				}

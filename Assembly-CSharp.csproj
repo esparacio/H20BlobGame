@@ -95,6 +95,7 @@
      <Compile Include="Assets\Scripts\PlantSunFlower.cs" />
      <Compile Include="Assets\Scripts\PowerState.cs" />
      <Compile Include="Assets\Scripts\Seed.cs" />
+     <Compile Include="Assets\Scripts\SeedCounter.cs" />
      <Compile Include="Assets\Scripts\StartButton.cs" />
      <Compile Include="Assets\Scripts\StateTest.cs" />
      <Compile Include="Assets\Scripts\StoryCanvas.cs" />
