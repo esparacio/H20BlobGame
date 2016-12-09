@@ -36,9 +36,8 @@ public class Seed : MonoBehaviour {
 	void SeedCollected(){
 
 		//tell the player they got a seed
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-		uiScript.PrintCenterMessage ("Congrats! You collected a seed!", 5);
+		StoryCanvas storyScript = GameObject.Find("StoryCanvas").GetComponent<StoryCanvas>();
+		storyScript.PrintCenterMessage ("Congrats! You collected a seed!", 5);
 	
 		//add a seed to the seed counter in another script
 		PlantSunFlower seedScript = GameObject.Find ("ActualBlob").GetComponent<PlantSunFlower> ();

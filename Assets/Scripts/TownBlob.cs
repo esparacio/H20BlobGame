@@ -43,9 +43,8 @@ public class TownBlob : MonoBehaviour {
 
 		System.Random rand = new System.Random ();
 		int random = rand.Next (MIN, MAX);
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-		uiScript.Dialog (genericDialogue[random]);
+		StoryCanvas storyScript = GameObject.Find ("StoryCanvas").GetComponent<StoryCanvas> ();
+		storyScript.Dialog (genericDialogue[random]);
 
 	}
 

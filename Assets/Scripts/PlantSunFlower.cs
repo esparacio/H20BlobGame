@@ -19,7 +19,6 @@ public class PlantSunFlower : MonoBehaviour {
 	private int numSeeds;
 	private bool isFirst;
 	BlobPlayer blobPlayer;	
-	Temperature temp;
 
 	//constants
 	const float MIN_DIST = 15.0f;
@@ -34,7 +33,6 @@ public class PlantSunFlower : MonoBehaviour {
 
 		GameObject actualBlob = GameObject.Find ("ActualBlob");
 		blobPlayer = actualBlob.GetComponent<BlobPlayer> ();
-		temp = GameObject.Find ("Temperature").GetComponent<Temperature> ();
 
 	}
 
@@ -99,7 +97,6 @@ public class PlantSunFlower : MonoBehaviour {
 					//if the water place is destroyed, on trigger exit is NOT called, but we need to
 					//change the power back
 					blobPlayer.SetState ("ice");
-					temp.setTemp (0);
 
 
 				}
@@ -114,7 +111,6 @@ public class PlantSunFlower : MonoBehaviour {
 					//if the vapor place is destroyed, on trigger exit is NOT called, but we need to
 					//change the power back
 					blobPlayer.SetState ("ice");
-					temp.setTemp (0);
 					numSeeds++;
 				}
 			}

@@ -12,13 +12,13 @@ By: Elena Sparacio
 public class GameControl : MonoBehaviour {
 
 	private Vector3 startPos;
-	private UI uScript;
+	private StoryCanvas storyScript;
 	private CharacterController control;
 
 	// Use this for initialization
 	void Start () {
 
-		uScript = GameObject.Find ("UICanvas").GetComponent<UI> ();
+		storyScript = GameObject.Find ("StoryCanvas").GetComponent<StoryCanvas> ();
 		startPos = GameObject.Find ("ActualBlob").transform.position;
 		control = GameObject.Find("ActualBlob").GetComponent<CharacterController> ();
 	
@@ -45,7 +45,7 @@ public class GameControl : MonoBehaviour {
 	//Oops is a method that respawns a character once they die
 	public void Oops(){
 		//play a message
-		uScript.PrintCenterMessage ("Oops!", 3);
+		storyScript.PrintCenterMessage ("Oops!", 3);
 		//Find blob and respawn him
 		GameObject actualBlob = GameObject.Find ("ActualBlob");
 		actualBlob.transform.position = startPos;
@@ -67,28 +67,9 @@ public class GameControl : MonoBehaviour {
 		renderer.enabled=false;
 
 		//play the message and disable controls
-		uScript.PrintCenterMessage("...you... Died...",3);
+		storyScript.PrintCenterMessage("...you... Died...",3);
 		control.enabled = false;
 
-
-	}
-
-
-	//GrandBlobDie is activated if you try to freeze your Grandblob to death 
-	public IEnumerator GrandBlobDie(){
-
-		yield return new WaitForSeconds(3);
-		GameObject grandblob = GameObject.Find ("grandpa");
-		Destroy (grandblob.gameObject);
-
-	}
-
-	//you Win activates once you have finished the game - this will probably change
-	public void YouWin(){
-
-		uScript.PrintCenterMessage("You found all the seeds! You have saved GrandBlob!",5);
-		Cursor.lockState = CursorLockMode.None;
-		Time.timeScale = 0;
 
 	}
 

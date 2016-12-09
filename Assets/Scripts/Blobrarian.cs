@@ -52,9 +52,8 @@ public class Blobrarian : MonoBehaviour {
 		} else {
 
 			//Print generic dialogue
-			GameObject UICanvas = GameObject.Find ("UICanvas");
-			UI uiScript = UICanvas.GetComponent<UI>();
-			uiScript.Dialog ("Good luck saving your Grandblob.");
+			StoryCanvas storyScript = GameObject.Find("StoryCanvas").GetComponent<StoryCanvas>();
+			storyScript.Dialog ("Good luck saving your Grandblob.");
 
 		}
 

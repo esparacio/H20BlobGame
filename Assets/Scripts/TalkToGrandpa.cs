@@ -15,6 +15,7 @@ public class TalkToGrandpa : MonoBehaviour {
 	const float MIN_DIST = 5.0f;
 	const float WIN_NUM_SEEDS = 8;
 	private bool cutscene1; 
+	StoryCanvas storyScript;
 
 	// Use this for initialization
 	void Start () {
@@ -22,6 +23,8 @@ public class TalkToGrandpa : MonoBehaviour {
 		//the cutscene has not been played upon initialization
 		cutscene1 = false; 
 		InvokeRepeating ("CheckObjectsAroundHim", spawnTime, spawnTime);
+		storyScript = GameObject.Find("StoryCanvas").GetComponent<StoryCanvas>();
+
 	
 	}
 
@@ -46,15 +49,11 @@ public class TalkToGrandpa : MonoBehaviour {
 
 		} else if (other.gameObject.tag == "seed") {
 			//GrandBlob dialogue when he is feeling a bit warmer
-			GameObject UICanvas = GameObject.Find ("UICanvas");
-			UI uiScript = UICanvas.GetComponent<UI>();
-			uiScript.Dialog ("T-t-that's a b-b-bit... Warmer.");
+			storyScript.Dialog ("T-t-that's a b-b-bit... Warmer.");
 
 		} else {
 			//GrandBlob dialogue
-			GameObject UICanvas = GameObject.Find ("UICanvas");
-			UI uiScript = UICanvas.GetComponent<UI>();
-			uiScript.Dialog ("*shiver shiver*");
+			storyScript.Dialog ("*shiver shiver*");
 
 		}
 	}
@@ -85,9 +84,7 @@ public class TalkToGrandpa : MonoBehaviour {
 		{
 			Vector3 icePlace = iceMagics [i].transform.position;
 			if (Vector3.Distance (transform.position, icePlace) <= MIN_DIST) {
-				GameObject UICanvas = GameObject.Find ("UICanvas");
-				UI uiScript = UICanvas.GetComponent<UI>();
-				uiScript.Dialog ("It is too cold! Oh noooo!");
+				storyScript.Dialog ("It is too cold! Oh noooo!");
 			}
 		}
 

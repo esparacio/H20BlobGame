@@ -15,6 +15,7 @@ public class MovieCamera : MonoBehaviour {
 	//set both cameras and other related variables
 	[SerializeField] Camera movieCam;
 	[SerializeField] Camera charCam;
+	StoryCanvas storyScript;
 
 	private float speed = 0.13f;
 	private Vector3 destination;
@@ -22,6 +23,9 @@ public class MovieCamera : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+
+		//get story canvas
+		storyScript = GameObject.Find("StoryCanvas").GetComponent<StoryCanvas>();
 
 		SetMovieCam ();
 		CutsceneSetup ();
@@ -46,10 +50,7 @@ public class MovieCamera : MonoBehaviour {
 		//skip animation if enter/return key is pressed
 		if (Input.GetKeyDown("enter")||(Input.GetKeyDown("return")))
 		{
-			print ("Skip cutscenes");
-			GameObject UICanvas = GameObject.Find ("UICanvas");
-			UI uiScript = UICanvas.GetComponent<UI>();
-			uiScript.setSkip (true);
+			storyScript.setSkip (true);
 			OnTriggerEnter (null);
 		}
 	}
@@ -92,12 +93,8 @@ public class MovieCamera : MonoBehaviour {
 
 		//show controls text and temperature
 		string controls = "Press \"c\" for controls :)";
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		Text uiText = UICanvas.GetComponent<Text>();
-		uiText.text = controls;
-		Image thermometer = GameObject.Find ("Temperature").GetComponent<Image>();
-		thermometer.enabled = true;
-		GameObject.Find ("Slider").transform.localScale = new Vector3(1, 1, 1);
+		Text controlText = GameObject.Find("ControlCanvas").GetComponent<Text>();
+		controlText.text = controls;
 
 	}
 
@@ -127,12 +124,8 @@ public class MovieCamera : MonoBehaviour {
 		setMovieScreen (true);
 
 		//hide controls text and temperature bar
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		Text uiText = UICanvas.GetComponent<Text>();
-		uiText.text = "";
-		Image thermometer = GameObject.Find ("Temperature").GetComponent<Image>();
-		thermometer.enabled = false;
-		GameObject.Find ("Slider").transform.localScale = new Vector3(0, 0, 0);
+		Text controlText = GameObject.Find("ControlCanvas").GetComponent<Text>();
+		controlText.text = "";
 
 	}
 
@@ -143,17 +136,14 @@ public class MovieCamera : MonoBehaviour {
 		//don't allow the player to move the cursor
 		Cursor.visible = false;
 
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-
 		//Print introduction
 		string [] messages = new string[8];
 		messages [0] = "You begin in the Arctic Tundra...";
 		messages [1] = "A blob with no name that has the ability to control ice.";
-		messages [2] = "Until now, you’ve just used your abilities to go ice-skating";
-		messages [3] = "and freeze ground beef for those tacos you’d like to make next month.";
+		messages [2] = "Until now, you’ve just used your abilities\n to go ice-skating";
+		messages [3] = "and freeze ground beef for those tacos\n you’d like to make next month.";
 		messages [4] = "But one day...";
-		messages [5] = "Everything changes when you go to visit your Grandblob.";
+		messages [5] = "Everything changes when you go to\n visit your Grandblob.";
 		messages [6] = "";
 		messages [7] = "Go find your Grandblob.";
 
@@ -169,7 +159,7 @@ public class MovieCamera : MonoBehaviour {
 		}
 
 		//print messages
-		StartCoroutine (uiScript.specialWait (messages, times, colors));
+		StartCoroutine (storyScript.regularCutscene (messages, times, colors));
 
 	}
 
@@ -177,15 +167,9 @@ public class MovieCamera : MonoBehaviour {
 	//the player blob. 
 	public void grandpaCutscene(){
 
-		//change background so text will show up
-		Image fadeImage = GameObject.Find ("FadeImage").GetComponent<Image>();
-		fadeImage.color = new Color32(255,255,225,50);
-
 		Cursor.visible = false;
 
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-		uiScript.setSkip (false);
+		storyScript.setSkip (false);
 
 		//Print grandblob scene
 		string [] messages = new string[9];
@@ -223,7 +207,7 @@ public class MovieCamera : MonoBehaviour {
 		colors [7] = grandblobColor;
 		colors [8] = Color.white;
 
-		StartCoroutine (uiScript.specialWait (messages, times, colors));
+		StartCoroutine (storyScript.dialogCutscene (messages, times, colors));
 
 		TalkToGrandpa script = GameObject.Find ("grandpa").GetComponent<TalkToGrandpa> ();
 		script.setCutscene (false);
@@ -238,15 +222,9 @@ public class MovieCamera : MonoBehaviour {
 	//their Grandblob
 	public void LibraryCutscene(){
 
-		//change background so text will show up
-		Image fadeImage = GameObject.Find ("FadeImage").GetComponent<Image>();
-		fadeImage.color = new Color32(255,255,225,50);
-
 		Cursor.visible = false;
 
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-		uiScript.setSkip (false);
+		storyScript.setSkip (false);
 
 		//Print library scene
 		string [] messages = new string[9];
@@ -290,7 +268,7 @@ public class MovieCamera : MonoBehaviour {
 		colors [7] = libraryColor;
 		colors [8] = Color.white;
 
-		StartCoroutine (uiScript.specialWait (messages, times, colors));
+		StartCoroutine (storyScript.dialogCutscene (messages, times, colors));
 
 		//disable the cutscene now that it has played
 		Blobrarian scriptLibrary = GameObject.Find ("Blobrarian").GetComponent<Blobrarian> ();
@@ -301,15 +279,13 @@ public class MovieCamera : MonoBehaviour {
 	//this tells the player more about planting seeds
 	public void SeedInstructions(){
 
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-		uiScript.setSkip (false);
+		storyScript.setSkip (false);
 
 		string[] messages = new string[4];
 		messages [0] = "You can plant seeds by pressing 'shift' to gain more powers.";
-		messages [1] = "One planted seed will give you water powers in an area.";
-		messages [2] = "Two planted seeds will give you vapor powers in an area.";
-		messages [3] = "Once you collect all of the seeds, \n plant them around Grandblob to warm him.";
+		messages [1] = "1 planted seed will give you WATER powers in an area.";
+		messages [2] = "2 planted seeds will give you VAPOR powers in an area";
+		messages [3] = "Once you collect ALL of the seeds, \n plant them around Grandblob to warm him.";
 
 		//create times and colors arrays
 		int[] times = new int[4];
@@ -321,22 +297,16 @@ public class MovieCamera : MonoBehaviour {
 			colors [i] = Color.white;
 		}
 
-		StartCoroutine (uiScript.specialWait (messages, times, colors));
+		StartCoroutine (storyScript.regularCutscene (messages, times, colors));
 
 	}
 
 	//this plays the final sequence of the game where Grandblob is saved
 	public void EndingSequence(){
 
-		//change background so text will show up
-		Image fadeImage = GameObject.Find ("FadeImage").GetComponent<Image>();
-		fadeImage.color = new Color32(255,255,225,50);
-
 		Cursor.visible = false;
 
-		GameObject UICanvas = GameObject.Find ("UICanvas");
-		UI uiScript = UICanvas.GetComponent<UI>();
-		uiScript.setSkip (false);
+		storyScript.setSkip (false);
 
 		//Print grandblob scene
 		string [] messages = new string[8];
@@ -373,8 +343,8 @@ public class MovieCamera : MonoBehaviour {
 		colors [6] = blobColor;
 		colors [7] = Color.white;
 
-		StartCoroutine (uiScript.specialWait (messages, times, colors));
-		uiScript.IsEnd (true);
+		StartCoroutine (storyScript.dialogCutscene (messages, times, colors));
+		storyScript.IsEnd (true);
 
 	}
 }

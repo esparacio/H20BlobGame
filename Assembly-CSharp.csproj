@@ -85,6 +85,7 @@
      <Compile Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Scripts\Vortex.cs" />
      <Compile Include="Assets\Scripts\BlobPlayer.cs" />
      <Compile Include="Assets\Scripts\Blobrarian.cs" />
+     <Compile Include="Assets\Scripts\Controls.cs" />
      <Compile Include="Assets\Scripts\DoorOpen.cs" />
      <Compile Include="Assets\Scripts\GameControl.cs" />
      <Compile Include="Assets\Scripts\IceCircle.cs" />
@@ -96,11 +97,11 @@
      <Compile Include="Assets\Scripts\Seed.cs" />
      <Compile Include="Assets\Scripts\StartButton.cs" />
      <Compile Include="Assets\Scripts\StateTest.cs" />
+     <Compile Include="Assets\Scripts\StoryCanvas.cs" />
      <Compile Include="Assets\Scripts\TalkToGrandpa.cs" />
      <Compile Include="Assets\Scripts\Temperature.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Scripts\TownBlob.cs" />
-     <Compile Include="Assets\Scripts\UI.cs" />
      <Compile Include="Assets\Scripts\VaporPlace.cs" />
      <Compile Include="Assets\Scripts\WEll.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
