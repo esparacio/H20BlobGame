@@ -128,7 +128,7 @@ public class BlobPlayer : MonoBehaviour {
 			if (Input.GetButtonDown ("Jump")) {
 				source.PlayOneShot(jumpSound);
 				ySpeed = JUMPSPEED;
-			} else {
+			} else if (!(currentState is VaporState)) {
 				ySpeed = 0;
 			}
 			//Slope detection needed only if the player is on the ground
@@ -253,7 +253,7 @@ public class BlobPlayer : MonoBehaviour {
 			}
 		}
 	}
-
+	//@author Elena Sparacio
 	//@author Patrick Lathan
 	class VaporState : PowerState {
 		public VaporState(BlobPlayer player) : base(player) {
@@ -273,12 +273,9 @@ public class BlobPlayer : MonoBehaviour {
 			if (Input.GetButton("Power")) {
 				//Lessen gravity
 				player.gravity = VAPORGRAVITY;
-
-				//Allow jumping in midair
-				if (Input.GetButtonDown("Jump")) {
-					player.source.PlayOneShot(player.jumpSound);
-					player.ySpeed = JUMPSPEED;
-				}
+				player.source.PlayOneShot(player.jumpSound);
+				player.ySpeed = JUMPSPEED;
+				//}
 			} else {
 				//Reset gravity to normal
 				player.gravity = BASEGRAVITY;
@@ -288,6 +285,7 @@ public class BlobPlayer : MonoBehaviour {
 		}
 	}
 
+	//@author Elena Sparacio
 	//@author Nathan Young
 	class WaterState : PowerState {
 		public WaterState(BlobPlayer player) : base(player) {
