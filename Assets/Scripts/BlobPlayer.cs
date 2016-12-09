@@ -234,7 +234,7 @@ public class BlobPlayer : MonoBehaviour {
 
 		public override void Update() {
 
-			if (Input.GetButtonDown("IcePower") && player.charController.isGrounded) {
+			if (Input.GetButtonDown("Power") && player.charController.isGrounded) {
 				GameObject[] iceCircles = GameObject.FindGameObjectsWithTag("ice");
 
 				//Destroy all previous ice circles when new one is spawned
@@ -270,7 +270,7 @@ public class BlobPlayer : MonoBehaviour {
 
 		public override void Update() {
 
-			if (Input.GetButton("VaporPower")) {
+			if (Input.GetButton("Power")) {
 				//Lessen gravity
 				player.gravity = VAPORGRAVITY;
 
@@ -300,7 +300,7 @@ public class BlobPlayer : MonoBehaviour {
 
 		public override void Update() {
 			//if button pushed and blob in a state where it can use water
-			if (Input.GetButton("WaterPower")) {
+			if (Input.GetButton("Power")) {
 
 				player.timeLeft = TIME_ACTIVE;
 
