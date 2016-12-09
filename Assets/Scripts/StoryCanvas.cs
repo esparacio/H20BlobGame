@@ -18,6 +18,7 @@ public class StoryCanvas : MonoBehaviour {
 	Text centerText;
 	Text convo1;
 	Text convo2;
+	Text questText;
 	//bool that is true if the user chose to skip the cutscene
 	private bool isSkip;
 	private bool isEnd;
@@ -29,6 +30,7 @@ public class StoryCanvas : MonoBehaviour {
 		centerText = this.gameObject.GetComponent<Text>();
 		convo1 = GameObject.Find ("Convo1").GetComponent<Text> ();
 		convo2 = GameObject.Find ("Convo2").GetComponent<Text> ();
+		questText = GameObject.Find ("Quest").GetComponent<Text> ();
 		//assign boolean values
 		isSkip = false;
 		isEnd = false;
@@ -153,6 +155,10 @@ public class StoryCanvas : MonoBehaviour {
 			Application.LoadLevel("MainMenu");
 		}
 
+	}
+
+	public void setQuestText(string questInfo){
+		questText.text = questInfo;
 	}
 
 	//Dialog is a method that displays a string at the lower part of the screen

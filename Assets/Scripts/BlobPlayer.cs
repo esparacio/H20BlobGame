@@ -98,7 +98,7 @@ public class BlobPlayer : MonoBehaviour {
 	//@author Patrick Lathan
 	public void SetState(string powerString) {
 		currentState = states[powerString];
-		currentState.Awake ();
+		currentState.Switch ();
 	}
 
 	//@author Patrick Lathan
@@ -223,7 +223,7 @@ public class BlobPlayer : MonoBehaviour {
 		public IceState(BlobPlayer player) : base(player) {
 		}
 
-		public override void Awake() {
+		public override void Switch() {
 
 			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
 			lowText.text = "Current Power: ICE";
@@ -259,7 +259,7 @@ public class BlobPlayer : MonoBehaviour {
 		public VaporState(BlobPlayer player) : base(player) {
 		}
 
-		public override void Awake() {
+		public override void Switch() {
 			
 			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
 			lowText.text = "Current Power: VAPOR";
@@ -291,7 +291,7 @@ public class BlobPlayer : MonoBehaviour {
 		public WaterState(BlobPlayer player) : base(player) {
 		}
 
-		public override void Awake() {
+		public override void Switch() {
 			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
 			lowText.text = "Current Power: WATER";
 		}

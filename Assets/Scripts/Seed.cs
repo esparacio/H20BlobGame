@@ -26,10 +26,12 @@ public class Seed : MonoBehaviour {
 	//if the player hits the seed, allow it to be collected
 	void OnTriggerEnter(Collider other) {
 
-		if (other.tag == "Player") {
+		//&&(this.gameObject.tag == "seed")
+
+		if ((other.tag == "Player")) {
 			SeedCollected ();
 			Destroy(this.gameObject);
-		}
+		} 
 	}
 
 	//seedCollected is called when the player gets a new seed. 

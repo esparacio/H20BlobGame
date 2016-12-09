@@ -38,6 +38,7 @@ public class Controls : MonoBehaviour {
 			"Press shift to plant a power-changing plant. \n" +
 			"1 plant gives you water powers.\n" +
 			"2 plants in the same spot gives you vapor powers. \n" +
+			"Press 'E' to pick up an already planted plant. \n" + 
 			"Press 'O' for the Oops! button.";
 		yield return new WaitForSeconds(aTime);
 		uiText.text = "Press 'c' to show controls";

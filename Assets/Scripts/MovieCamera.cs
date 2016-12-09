@@ -160,6 +160,7 @@ public class MovieCamera : MonoBehaviour {
 
 		//print messages
 		StartCoroutine (storyScript.regularCutscene (messages, times, colors));
+		storyScript.setQuestText ("Go find Grandblob.");
 
 	}
 
@@ -215,6 +216,8 @@ public class MovieCamera : MonoBehaviour {
 		//activate the next cutscene
 		Blobrarian scriptLibrary = GameObject.Find ("Blobrarian").GetComponent<Blobrarian> ();
 		scriptLibrary.setCutscene (true);
+		storyScript.setQuestText ("Go find help!");
+
 
 	}
 
@@ -229,7 +232,7 @@ public class MovieCamera : MonoBehaviour {
 		//Print library scene
 		string [] messages = new string[9];
 		messages [0] = "Hello there. You look worried.";
-		messages [1] = "I am! My Grandblob is FROZEN.";
+		messages [1] = "I am, Blobrarian! My Grandblob is FROZEN.";
 		messages [2] = "That's terrible. It must be Blobothermia, from the temperature.";
 		messages [3] = "Is there anything I can do to save him?";
 		messages [4] = "...Well, perhaps. There is a legend that certain plants around the world" +
@@ -273,6 +276,8 @@ public class MovieCamera : MonoBehaviour {
 		//disable the cutscene now that it has played
 		Blobrarian scriptLibrary = GameObject.Find ("Blobrarian").GetComponent<Blobrarian> ();
 		scriptLibrary.setCutscene (false);
+		storyScript.setQuestText ("Collect all the plants.");
+
 
 	}
 
@@ -281,18 +286,19 @@ public class MovieCamera : MonoBehaviour {
 
 		storyScript.setSkip (false);
 
-		string[] messages = new string[4];
+		string[] messages = new string[5];
 		messages [0] = "You can plant seeds by pressing 'shift' to gain more powers.";
 		messages [1] = "1 planted seed will give you WATER powers in an area.";
 		messages [2] = "2 planted seeds will give you VAPOR powers in an area";
-		messages [3] = "Once you collect ALL of the seeds, \n plant them around Grandblob to warm him.";
+		messages [3] = "Pick up a seed YOU PLANTED by pressing 'E'";
+		messages [4] = "Once you collect ALL of the seeds, \n plant them around Grandblob to warm him.";
 
 		//create times and colors arrays
-		int[] times = new int[4];
+		int[] times = new int[5];
 		for (int i = 0; i < times.Length; i++) {
 			times [i] = 3;
 		}
-		Color[] colors = new Color[4];
+		Color[] colors = new Color[5];
 		for (int i = 0; i < colors.Length; i++) {
 			colors [i] = Color.white;
 		}

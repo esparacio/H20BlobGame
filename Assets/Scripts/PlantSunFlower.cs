@@ -51,6 +51,7 @@ public class PlantSunFlower : MonoBehaviour {
 			if (Vector3.Distance (transform.position, grandBlob.transform.position) <= GRAND_DIST) {
 
 				GameObject seed = Instantiate (seedPrefab) as GameObject;
+				seed.tag = "grandpaSeed";
 				Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 2);
 				seed.transform.position = blobPosition;
 
@@ -78,6 +79,8 @@ public class PlantSunFlower : MonoBehaviour {
 			}
 
 			numSeeds--;
+			print (numSeeds);
+
 
 		}
 
@@ -98,8 +101,9 @@ public class PlantSunFlower : MonoBehaviour {
 					//if the water place is destroyed, on trigger exit is NOT called, but we need to
 					//change the power back
 					blobPlayer.SetState ("ice");
-
-
+					//give the player their seed back
+					numSeeds++;
+					print (numSeeds);
 				}
 			}
 		} else if (aSeed.tag == "vaporSeed") {
@@ -112,12 +116,13 @@ public class PlantSunFlower : MonoBehaviour {
 					//if the vapor place is destroyed, on trigger exit is NOT called, but we need to
 					//change the power back
 					blobPlayer.SetState ("ice");
-					numSeeds++;
+					numSeeds+=2;
+					print (numSeeds);
+
 				}
 			}
 		}
 
-		numSeeds++;
 		if (isFirst) {
 
 			MovieCamera movieScript = GameObject.Find ("SecondaryCamera").GetComponent<MovieCamera> ();
