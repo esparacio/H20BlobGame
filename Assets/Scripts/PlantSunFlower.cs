@@ -28,7 +28,7 @@ public class PlantSunFlower : MonoBehaviour {
 	//constants
 	const float MIN_DIST = 15.0f;
 	const float GRAND_DIST = 20.0f;
-	const int STARTING_NUM = 0;
+	const int STARTING_NUM = 8;
 
 
 	// Use this for initialization
@@ -109,9 +109,13 @@ public class PlantSunFlower : MonoBehaviour {
 			//if the vapor place is destroyed, on trigger exit is NOT called, but we need to
 			//change the power back
 			blobPlayer.SetState ("ice");
-			numSeeds+=2;
+			numSeeds += 2;
 			seedCounter.updateCounter (2);
 			print (numSeeds);
+		} else {
+			//collected a regular ole seed
+			numSeeds++;
+			seedCounter.updateCounter (1);
 		}
 
 		if (isFirst) {

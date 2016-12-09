@@ -47,7 +47,7 @@ public class TalkToGrandpa : MonoBehaviour {
 			MovieCamera cameraScript = GameObject.Find ("SecondaryCamera").GetComponent<MovieCamera> ();
 			cameraScript.grandpaCutscene ();
 
-		} else if (other.gameObject.tag == "seed") {
+		} else if (other.gameObject.tag == "grandpaSeed") {
 			//GrandBlob dialogue when he is feeling a bit warmer
 			storyScript.Dialog ("T-t-that's a b-b-bit... Warmer.");
 
@@ -89,7 +89,7 @@ public class TalkToGrandpa : MonoBehaviour {
 		}
 
 		//check if the player has won the game
-		GameObject [] seeds = GameObject.FindGameObjectsWithTag ("seed");
+		GameObject [] seeds = GameObject.FindGameObjectsWithTag ("grandpaSeed");
 		int winCounter = 0;
 		for(var i = 0 ; i < seeds.Length ; i ++)
 		{
