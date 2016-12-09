@@ -5,9 +5,9 @@ using System.Collections;
 public class SeedCounter : MonoBehaviour {
 
 	//get textfield for updating
-	Text seedText;
-	int totalSeeds;
-	int currentAmt;
+	private Text seedText;
+	public int totalSeeds;
+	private int currentAmt;
 
 	// Use this for initialization
 	void Start () {

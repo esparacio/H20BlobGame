@@ -13,7 +13,7 @@ public class TalkToGrandpa : MonoBehaviour {
 
 	public float spawnTime = 0.5f;
 	const float MIN_DIST = 5.0f;
-	const float WIN_NUM_SEEDS = 8;
+	private int winNumSeeds;
 	private bool cutscene1; 
 	StoryCanvas storyScript;
 
@@ -25,6 +25,9 @@ public class TalkToGrandpa : MonoBehaviour {
 		InvokeRepeating ("CheckObjectsAroundHim", spawnTime, spawnTime);
 		storyScript = GameObject.Find("StoryCanvas").GetComponent<StoryCanvas>();
 
+		//get the seeds needed to win
+		SeedCounter seedCounter = GameObject.Find ("SeedText").GetComponent<SeedCounter> ();
+		winNumSeeds = seedCounter.totalSeeds; 
 	
 	}
 
@@ -96,7 +99,7 @@ public class TalkToGrandpa : MonoBehaviour {
 			Vector3 seedPlace = seeds [i].transform.position;
 			if (Vector3.Distance (transform.position, seedPlace) <= MIN_DIST) {
 				winCounter++;
-				if (winCounter >= WIN_NUM_SEEDS) {
+				if (winCounter >= winNumSeeds) {
 					YouWin ();
 				}
 			}
