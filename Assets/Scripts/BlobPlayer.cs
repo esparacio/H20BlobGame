@@ -1,13 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Collections.Generic;
 
 public class BlobPlayer : MonoBehaviour {
 
 	//@author Nathan Young
-	public GameObject waterParticleSystem;
-	private ParticleSystem particleSystem;
+	private GameObject waterParticleObject;
+	public ParticleSystem waterParticleSystem;
 
 	//Also see particle system setting: start lifetime
 	public const float TIME_ACTIVE = 1f;
@@ -21,16 +20,16 @@ public class BlobPlayer : MonoBehaviour {
 	public AudioClip iceSound;
 	public AudioClip waterSound;
 	public AudioClip jumpSound;
-	private AudioSource source;
+	public AudioSource source;
 
 	private const float SPEED = 6.0f;
 	private const float JUMPSPEED = 0.5f;
 	private const float FRICTION = .5f;
-	private const float BASEGRAVITY = -2f;
+	public const float BASEGRAVITY = -2f;
 	private const float VAPORGRAVITY = -1f;
 	private const float MOMENTUMDECAY = 1.05f;
 
-	private float gravity;
+	public float gravity;
 
 	private float ySpeed;
 
@@ -38,9 +37,7 @@ public class BlobPlayer : MonoBehaviour {
 
 	public GameObject icePrefab;
 
-	private PowerState currentState;
-
-	Dictionary<string, PowerState> states;
+	public PowerState currentState;
 
 	private Vector3 momentumVector;
 
@@ -62,25 +59,17 @@ public class BlobPlayer : MonoBehaviour {
 
 	void Start() {
 		//@author Nathan Young
-		waterParticleSystem = GameObject.Find("WaterParticleSystem");
-		particleSystem = waterParticleSystem.GetComponent<ParticleSystem>();
+		waterParticleObject = GameObject.Find("WaterParticleSystem");
+		waterParticleSystem = waterParticleObject.GetComponent<ParticleSystem>();
 
-		waterParticleSystem.SetActive(true);
-		particleSystem.Play();
-		particleSystem.Stop();
+		waterParticleObject.SetActive(true);
+		waterParticleSystem.Play();
+        waterParticleSystem.Stop();
 
 		//@author Patrick Lathan
 		source = GetComponent<AudioSource>();
 
 		charController = GetComponent<CharacterController>();
-
-		//Create dictionary of states to be accessed by SetState()
-		states = new Dictionary<string, PowerState>()
-		{
-			{ "ice", new IceState(this) },
-			{ "water", new WaterState(this) },
-			{ "vapor", new VaporState(this) },
-		};
 
 		//Set intial vertical speed to zero
 		ySpeed = 0;
@@ -97,9 +86,19 @@ public class BlobPlayer : MonoBehaviour {
 
 	//@author Patrick Lathan
 	public void SetState(string powerString) {
-		currentState = states[powerString];
-		currentState.Switch ();
-	}
+        //TODO ELIMINATE THESE IF STATEMENTS AND DO NOT SWITCH BASED ON STRINGS
+        if (powerString.Equals("water")) {
+            currentState = new WaterState(this);
+        } else if (powerString.Equals("ice")) {
+            currentState = new IceState(this);
+        } else if (powerString.Equals("vapor")) {
+            currentState = new VaporState(this);
+        } else {
+            Debug.Log("invalid power string passed to SetState");
+        }
+        currentState.Awake();
+
+    }
 
 	//@author Patrick Lathan
 	void Update() {
@@ -128,7 +127,8 @@ public class BlobPlayer : MonoBehaviour {
 			if (Input.GetButtonDown ("Jump")) {
 				source.PlayOneShot(jumpSound);
 				ySpeed = JUMPSPEED;
-			} else if (!(currentState is VaporState)) {
+			} else {
+                //Important: this must be called before VaporState's Update() so that it can be reset if necessary
 				ySpeed = 0;
 			}
 			//Slope detection needed only if the player is on the ground
@@ -223,15 +223,6 @@ public class BlobPlayer : MonoBehaviour {
 		public IceState(BlobPlayer player) : base(player) {
 		}
 
-		public override void Switch() {
-
-			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
-			lowText.text = "Current Power: ICE";
-			//stop water particles 
-			player.particleSystem.Stop(); 
-			player.source.Stop();
-		}
-
 		public override void Update() {
 
 			if (Input.GetButtonDown("Power") && player.charController.isGrounded) {
@@ -252,20 +243,15 @@ public class BlobPlayer : MonoBehaviour {
 				iceCircle.transform.position = blobPosition;
 			}
 		}
-	}
+
+        public override string ToString() {
+            return "ICE";
+        }
+    }
 	//@author Elena Sparacio
 	//@author Patrick Lathan
 	class VaporState : PowerState {
 		public VaporState(BlobPlayer player) : base(player) {
-		}
-
-		public override void Switch() {
-			
-			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
-			lowText.text = "Current Power: VAPOR";
-			//stop water particles 
-			player.particleSystem.Stop(); 
-			player.source.Stop();
 		}
 
 		public override void Update() {
@@ -273,27 +259,26 @@ public class BlobPlayer : MonoBehaviour {
 			if (Input.GetButton("Power")) {
 				//Lessen gravity
 				player.gravity = VAPORGRAVITY;
-				player.source.PlayOneShot(player.jumpSound);
-				player.ySpeed = JUMPSPEED;
-				//}
-			} else {
+
+                if (Input.GetButtonDown("Jump")) {
+                    player.ySpeed = JUMPSPEED;
+                    player.source.PlayOneShot(player.jumpSound);
+                }
+            } else {
 				//Reset gravity to normal
 				player.gravity = BASEGRAVITY;
 			}
-
-
 		}
-	}
+
+        public override string ToString() {
+            return "VAPOR";
+        }
+    }
 
 	//@author Elena Sparacio
 	//@author Nathan Young
 	class WaterState : PowerState {
 		public WaterState(BlobPlayer player) : base(player) {
-		}
-
-		public override void Switch() {
-			Text lowText = GameObject.Find ("LowCanvas").GetComponent<Text> ();
-			lowText.text = "Current Power: WATER";
 		}
 
 		public override void Update() {
@@ -303,19 +288,23 @@ public class BlobPlayer : MonoBehaviour {
 				player.timeLeft = TIME_ACTIVE;
 
 				//if the water particle system is not already on, turn it on
-				if (!player.particleSystem.isPlaying) {
-					player.particleSystem.Play();
+				if (!player.waterParticleSystem.isPlaying) {
+					player.waterParticleSystem.Play();
 					player.source.PlayOneShot(player.waterSound);
 				}
 			} else {
 				player.timeLeft -= Time.deltaTime;
 				//if player hasn't used water in a while it stops being active
-				if (player.timeLeft < 0 && player.particleSystem.isPlaying) {
-					player.particleSystem.Stop(); // gameObject.GetComponent<ParticleSystem>().enableEmission = false; maybe use this, but its deprecated
+				if (player.timeLeft < 0 && player.waterParticleSystem.isPlaying) {
+					player.waterParticleSystem.Stop(); // gameObject.GetComponent<ParticleSystem>().enableEmission = false; maybe use this, but its deprecated
 					// above source is from http://answers.unity3d.com/questions/37875/turning-the-particle-system-on-and-off.html
 					player.source.Stop();
 				}
 			}
 		}
-	}
+
+        public override string ToString() {
+            return "WATER";
+        }
+    }
 }

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.UI;
 
 public abstract class PowerState {
 
@@ -10,8 +10,21 @@ public abstract class PowerState {
 		player = playerObj;
 	}
 
-	public abstract void Switch ();
+    public void Awake() {
+        // Display current power onscreen
+        Text lowText = GameObject.Find("LowCanvas").GetComponent<Text>();
+        lowText.text = "Left mouse: " + player.currentState.ToString();
+
+        // Disable water particles and sound
+        player.waterParticleSystem.Stop();
+        player.source.Stop();
+        // Disable vapor "floatiness"
+        player.gravity = BlobPlayer.BASEGRAVITY;
+        // Ice blocks are allowed to remain when state is switched
+    }
 
 	public abstract void Update();
+
+    public override abstract string ToString();
 
 }
