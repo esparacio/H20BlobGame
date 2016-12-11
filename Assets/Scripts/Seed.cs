@@ -11,28 +11,36 @@ Written by: Elena Sparacio
 
 */
 public class Seed : MonoBehaviour {
-
+    private bool collectable;
 
 	// Use this for initialization
 	void Start () {
-		
+        collectable = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-	}
+        if (collectable && Input.GetButtonDown("Collect")) {
+            // TODO display "press e to collect seed" onscreen
+            SeedCollected();
+            Destroy(this.gameObject);
+        }
+    }
 
 	//if the player hits the seed, allow it to be collected
 	void OnTriggerEnter(Collider other) {
+        if (other.tag == "Player") {
+            collectable = true;
+        }
 
 		//&&(this.gameObject.tag == "seed")
 
-		if ((other.tag == "Player")) {
-			SeedCollected ();
-			Destroy(this.gameObject);
-		} 
+
 	}
+
+    void OnTriggerExit() {
+        collectable = false;
+    }
 
 	//seedCollected is called when the player gets a new seed. 
 	void SeedCollected(){

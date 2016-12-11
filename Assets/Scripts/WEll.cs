@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class WEll : MonoBehaviour {
+public class Well : MonoBehaviour {
 
 	private float progress;
 	private float startPos;
