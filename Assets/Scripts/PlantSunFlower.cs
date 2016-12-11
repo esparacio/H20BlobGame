@@ -66,22 +66,22 @@ public class PlantSunFlower : MonoBehaviour {
 				//if a water place exists in the area, create a vapor place instead!
 				bool isVapor = false;
 
+                //Find all existing waterPlaces
 				GameObject[] waterPlaces = GameObject.FindGameObjectsWithTag ("waterPlace");
-				for (var i = 0; i < waterPlaces.Length; i++) {
-					Vector3 waterPlacePos = waterPlaces [i].transform.position;
-					if (Vector3.Distance (transform.position, waterPlacePos) <= MIN_DIST) {
-						Destroy (waterPlaces [i]);
-						GameObject newPlace = Instantiate (vaporPlacePrefab) as GameObject;
-						Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 5);
-						newPlace.transform.position = blobPosition;
-						isVapor = true;
+
+				foreach (GameObject waterPlace in waterPlaces) {
+                    // Detect if blob is in range of existing water place
+					if (Vector3.Distance (transform.position, waterPlace.transform.position) <= MIN_DIST) {
+                        // If blob is in range, destroy existing water place and replace with vapor place
+						Destroy (waterPlace);
+                        isVapor = true;
+                        // Once ONE waterPlace has been replaced, exit loop
+                        break;
 					} 
 				}
-				if (!isVapor) {
-					GameObject newPlace = Instantiate (waterPlacePrefab) as GameObject;
-					Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 5);
-					newPlace.transform.position = blobPosition;
-				}
+				GameObject newPlace = Instantiate (isVapor ? vaporPlacePrefab : waterPlacePrefab) as GameObject;
+				Vector3 blobPosition = blob.transform.position + (blob.transform.forward);
+				newPlace.transform.position = blobPosition;
 			}
 
 			numSeeds--;

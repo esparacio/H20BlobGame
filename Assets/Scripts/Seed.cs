@@ -29,7 +29,13 @@ public class Seed : MonoBehaviour {
 
 	//if the player hits the seed, allow it to be collected
 	void OnTriggerEnter(Collider other) {
-        collectable = (other.tag == "Player");
+        //TODO should we collect non-planted seeds automatically?
+        //TODO should we display a message whenever any seed is in range?
+        if (other.tag == "Player") {
+            StoryCanvas storyScript = GameObject.Find("StoryCanvas").GetComponent<StoryCanvas>();
+            storyScript.PrintCenterMessage("Press E to collect a seed", 5);
+            collectable = true;
+        }
 
 		//&&(this.gameObject.tag == "seed")
 

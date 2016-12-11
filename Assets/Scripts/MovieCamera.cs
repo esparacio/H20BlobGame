@@ -51,7 +51,6 @@ public class MovieCamera : MonoBehaviour {
 		if (Input.GetKeyDown("enter")||(Input.GetKeyDown("return")))
 		{
 			storyScript.setSkip (true);
-			OnTriggerEnter (null);
 		}
 	}
 

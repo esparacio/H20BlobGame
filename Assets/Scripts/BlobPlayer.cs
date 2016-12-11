@@ -62,7 +62,6 @@ public class BlobPlayer : MonoBehaviour {
 		waterParticleSystem = waterParticleObject.GetComponent<ParticleSystem>();
 
 		waterParticleObject.SetActive(true);
-		waterParticleSystem.Play();
         waterParticleSystem.Stop();
 
 		//@author Patrick Lathan
