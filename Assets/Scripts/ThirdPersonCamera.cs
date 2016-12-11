@@ -21,6 +21,10 @@ public class ThirdPersonCamera : MonoBehaviour {
 	private float cameraHeight = 3f;
 	private float cameraDepth = 4f;
 
+    private bool lerpTowardsPlayer = false;
+    private float distanceFromSurface;
+    private float progress = 1f;
+
 	private GameObject player;
 
 	void Start() {
@@ -35,6 +39,8 @@ public class ThirdPersonCamera : MonoBehaviour {
 
 		// Point at target
 		transform.LookAt(player.transform);
+
+        distanceFromSurface = Vector3.Distance(player.transform.position, transform.position);
 	}
 
 	void Update() {
@@ -59,6 +65,33 @@ public class ThirdPersonCamera : MonoBehaviour {
 		float currentXRot = player.transform.localEulerAngles.x;
 		// Modify player rotation
 		player.transform.localEulerAngles = new Vector3(currentXRot, yRot, 0);
-	}
+
+        // Vector pointing from player through camera
+        Vector3 directionOfTravel = transform.position - player.transform.position;
+        // Sets magnitude of vector to original camera distance
+        Vector3 finalDirection = directionOfTravel.normalized * distanceFromSurface;
+        // Adds the vector of correct length and magnitude to the current player position
+        Vector3 targetPosition = player.transform.position + finalDirection;
+        //Debug.Log(targetPosition);
+        //Debug.Log(transform.position);
+
+        //TODO: set collider size to larger than a point so it will continue detection longer
+        if (lerpTowardsPlayer) {
+            progress -= .05f;
+        } else {
+            progress += .05f;
+        }
+        progress = Mathf.Clamp(progress, .5f, 1);
+        transform.position = Vector3.Lerp(player.transform.position, targetPosition, progress);
+    }
+
+    // Camera LERPing concept from http://answers.unity3d.com/questions/14693/stop-camera-from-going-trough-walls.html
+    void OnTriggerStay(Collider other) {
+        lerpTowardsPlayer = true;
+    }
+
+    void OnTriggerExit() {
+        lerpTowardsPlayer = false;
+    }
 
 }

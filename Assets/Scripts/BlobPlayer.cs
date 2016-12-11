@@ -133,7 +133,7 @@ public class BlobPlayer : MonoBehaviour {
         } else {
             ySpeed += gravity * Time.deltaTime;
         }
-        Mathf.Clamp(ySpeed, gravity, JUMPSPEED);
+        ySpeed = Mathf.Clamp(ySpeed, gravity, JUMPSPEED);
 
 		//Clamp vector magnitude ("speed") while ignoring movement on y axis
 		//Reimplement this in case of uncontrollable acceleration
