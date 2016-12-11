@@ -124,6 +124,9 @@ public class BlobPlayer : MonoBehaviour {
 		}
 
 		if (charController.isGrounded) {
+            if (ySpeed <= BASEGRAVITY) {
+                Debug.Log("DEAD");
+            }
 			if (Input.GetButtonDown ("Jump")) {
 				source.PlayOneShot(jumpSound);
 				ySpeed = JUMPSPEED;
@@ -135,7 +138,9 @@ public class BlobPlayer : MonoBehaviour {
 			CheckGround(new Vector3(transform.position.x, transform.position.y - (charController.height / 2) + startDistanceFromBottom, transform.position.z));
 		}
 
-		ySpeed += gravity * Time.deltaTime;
+        if (ySpeed > gravity) {
+            ySpeed += gravity * Time.deltaTime;
+        }
 
 		//Clamp vector magnitude ("speed") while ignoring movement on y axis
 		//Reimplement this in case of uncontrollable acceleration
