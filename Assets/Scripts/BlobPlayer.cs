@@ -13,7 +13,6 @@ public class BlobPlayer : MonoBehaviour {
 
 	//http://answers.unity3d.com/questions/225213/c-countdown-timer.html
 	private float timeLeft; //time left for power on
-	private bool canUseWater = true;
 	private bool waterIsActive;
 
 	//@author Patrick Lathan
@@ -31,7 +30,7 @@ public class BlobPlayer : MonoBehaviour {
 
 	public float gravity;
 
-	public float ySpeed;
+	private float ySpeed;
 
 	private CharacterController charController;
 
@@ -72,7 +71,6 @@ public class BlobPlayer : MonoBehaviour {
 		charController = GetComponent<CharacterController>();
 
 		//Set intial vertical speed to zero
-        //TODO make this private again
 		ySpeed = 0;
 
 		//Set initial gravity to base value
@@ -121,11 +119,9 @@ public class BlobPlayer : MonoBehaviour {
 
         if (charController.isGrounded) {
             // This allows players to survive any fall if they use their vapor power
-            if (ySpeed <= BASEGRAVITY) {
-                //GameControl controller = GameObject.Find("Controller").GetComponent<GameControl>();
-                //controller.YouDied();
-                Debug.Log("You Died");
-            }
+            //if (ySpeed <= BASEGRAVITY) {
+            //    Debug.Log("You Died");
+            //}
             // Reset ySpeed so that it will not continue to increase while on a surface
             // isGrounded WILL BREAK if ySpeed is set to 0, ySpeed MUST NOT be 0 for isGrounded to work
             ySpeed = -.01f;

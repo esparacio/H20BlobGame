@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 /*
@@ -90,7 +91,7 @@ public class StoryCanvas : MonoBehaviour {
 		if (isEnd) {
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.Confined;
-			Application.LoadLevel("MainMenu");
+			SceneManager.LoadScene("MainMenu");
 		}
 
 	}
@@ -151,7 +152,7 @@ public class StoryCanvas : MonoBehaviour {
 		if (isEnd) {
 			Cursor.visible = true;
 			Cursor.lockState = CursorLockMode.Confined;
-			Application.LoadLevel("MainMenu");
+			SceneManager.LoadScene("MainMenu");
 		}
 
 	}

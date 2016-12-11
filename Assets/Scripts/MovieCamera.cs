@@ -91,8 +91,14 @@ public class MovieCamera : MonoBehaviour {
 		//take off movie bars
 		setMovieScreen(false);
 
-		//show controls text and temperature
-		string controls = "Press \"c\" for controls :)";
+        //stop moviecamera music
+        GetComponent<AudioSource>().Stop();
+
+        //start game music
+        charCam.GetComponent<AudioSource>().Play();
+
+        //show controls text and temperature
+        string controls = "Press \"c\" for controls :)";
 		Text controlText = GameObject.Find("ControlCanvas").GetComponent<Text>();
 		controlText.text = controls;
 

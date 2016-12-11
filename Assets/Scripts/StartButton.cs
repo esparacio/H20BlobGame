@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 
 /*
@@ -25,7 +26,7 @@ public class StartButton : MonoBehaviour {
 	//Load the scene upon start
 	public void startGame(){
 
-		Application.LoadLevel("SnowMountains");
+		SceneManager.LoadScene("SnowMountains");
 
 	}
 
