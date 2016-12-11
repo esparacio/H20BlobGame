@@ -29,9 +29,7 @@ public class Seed : MonoBehaviour {
 
 	//if the player hits the seed, allow it to be collected
 	void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player") {
-            collectable = true;
-        }
+        collectable = (other.tag == "Player");
 
 		//&&(this.gameObject.tag == "seed")
 

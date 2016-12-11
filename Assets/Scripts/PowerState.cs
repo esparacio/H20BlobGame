@@ -13,7 +13,7 @@ public abstract class PowerState {
     public void Awake() {
         // Display current power onscreen
         Text lowText = GameObject.Find("LowCanvas").GetComponent<Text>();
-        lowText.text = "Left mouse: " + player.currentState.ToString();
+        lowText.text = "Left click: " + player.currentState.ToString();
 
         // Disable water particles and sound
         player.waterParticleSystem.Stop();

@@ -26,12 +26,12 @@ public class BlobPlayer : MonoBehaviour {
 	private const float JUMPSPEED = 0.5f;
 	private const float FRICTION = .5f;
 	public const float BASEGRAVITY = -2f;
-	private const float VAPORGRAVITY = -1f;
+	private const float VAPORGRAVITY = -.5f;
 	private const float MOMENTUMDECAY = 1.05f;
 
 	public float gravity;
 
-	private float ySpeed;
+	public float ySpeed;
 
 	private CharacterController charController;
 
@@ -72,6 +72,7 @@ public class BlobPlayer : MonoBehaviour {
 		charController = GetComponent<CharacterController>();
 
 		//Set intial vertical speed to zero
+        //TODO make this private again
 		ySpeed = 0;
 
 		//Set initial gravity to base value
@@ -118,29 +119,26 @@ public class BlobPlayer : MonoBehaviour {
 			momentumVector += (this.gameObject.transform.forward * FRICTION) * zSpeed * Time.deltaTime;
 		}
 
-		if (!(currentState is VaporState)) {
-			// Make sure gravity is always reset when exiting vapor state
-			gravity = BASEGRAVITY;
-		}
-
-		if (charController.isGrounded) {
+        if (charController.isGrounded) {
+            // This allows players to survive any fall if they use their vapor power
             if (ySpeed <= BASEGRAVITY) {
-                Debug.Log("DEAD");
+                //GameControl controller = GameObject.Find("Controller").GetComponent<GameControl>();
+                //controller.YouDied();
+                Debug.Log("You Died");
             }
-			if (Input.GetButtonDown ("Jump")) {
-				source.PlayOneShot(jumpSound);
-				ySpeed = JUMPSPEED;
-			} else {
-                //Important: this must be called before VaporState's Update() so that it can be reset if necessary
-				ySpeed = 0;
-			}
-			//Slope detection needed only if the player is on the ground
-			CheckGround(new Vector3(transform.position.x, transform.position.y - (charController.height / 2) + startDistanceFromBottom, transform.position.z));
-		}
-
-        if (ySpeed > gravity) {
+            // Reset ySpeed so that it will not continue to increase while on a surface
+            // isGrounded WILL BREAK if ySpeed is set to 0, ySpeed MUST NOT be 0 for isGrounded to work
+            ySpeed = -.01f;
+            if (Input.GetButtonDown("Jump")) {
+                source.PlayOneShot(jumpSound);
+                ySpeed = JUMPSPEED;
+            }
+            //Slope detection needed only if the player is on the ground
+            CheckGround(new Vector3(transform.position.x, transform.position.y - (charController.height / 2) + startDistanceFromBottom, transform.position.z));
+        } else {
             ySpeed += gravity * Time.deltaTime;
         }
+        Mathf.Clamp(ySpeed, gravity, JUMPSPEED);
 
 		//Clamp vector magnitude ("speed") while ignoring movement on y axis
 		//Reimplement this in case of uncontrollable acceleration
@@ -235,8 +233,10 @@ public class BlobPlayer : MonoBehaviour {
 				GameObject iceCircle = Instantiate(player.icePrefab) as GameObject;
 				player.source.PlayOneShot(player.iceSound);
 
-                //Place ice in front of blob
+                // Place ice in front of blob
                 iceCircle.transform.position = player.transform.position + (player.transform.forward * 5) + (player.transform.up * 2);
+                // Rotate ice slightly so that it won't accidentally fall through flat surfaces
+                iceCircle.transform.Rotate(player.transform.right, 2f);
 			}
 		}
 
