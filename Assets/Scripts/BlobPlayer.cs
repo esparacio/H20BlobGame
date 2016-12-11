@@ -230,22 +230,13 @@ public class BlobPlayer : MonoBehaviour {
 
 		public override void Update() {
 
-			if (Input.GetButtonDown("Power") && player.charController.isGrounded) {
-				GameObject[] iceCircles = GameObject.FindGameObjectsWithTag("ice");
-
-				//Destroy all previous ice circles when new one is spawned
-				foreach (GameObject oldIceCircle in iceCircles) {
-					Destroy(oldIceCircle);
-				}
+			if (Input.GetButtonDown("Power")) {
 
 				GameObject iceCircle = Instantiate(player.icePrefab) as GameObject;
 				player.source.PlayOneShot(player.iceSound);
-				GameObject blob = GameObject.Find("ActualBlob");
 
-				Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 2);
-
-				//Place ice in front of blob
-				iceCircle.transform.position = blobPosition;
+                //Place ice in front of blob
+                iceCircle.transform.position = player.transform.position + (player.transform.forward * 5) + (player.transform.up * 2);
 			}
 		}
 

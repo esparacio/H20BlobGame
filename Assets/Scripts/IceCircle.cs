@@ -27,7 +27,7 @@ public class IceCircle : MonoBehaviour {
         minScale = .25f * horScale;
         speed = 0.5f;
 		//formerly 2
-        delay = 0;
+        delay = 5;
         startTime = Time.time + delay;
     }
 	
