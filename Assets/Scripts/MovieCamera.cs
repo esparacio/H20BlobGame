@@ -17,7 +17,7 @@ public class MovieCamera : MonoBehaviour {
 	[SerializeField] Camera charCam;
 	StoryCanvas storyScript;
 
-	private float speed = 0.13f;
+	private float speed = 0.122f;
 	private Vector3 destination;
 	private bool isBegin;
 
@@ -164,11 +164,15 @@ public class MovieCamera : MonoBehaviour {
 		StartCoroutine (storyScript.regularCutscene (messages, times, colors));
 		storyScript.setQuestText ("Go find Grandblob.");
 
+
 	}
 
 	//grandpaCutscene is the second cutscene of the game. It is a conversation between Grandblob and
 	//the player blob. 
 	public void grandpaCutscene(){
+
+		//reset camera rotation
+		movieCam.transform.eulerAngles = new Vector3(0, 0, 0);
 		
 		storyScript.setSkip (false);
 
