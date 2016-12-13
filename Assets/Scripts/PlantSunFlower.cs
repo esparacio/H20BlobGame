@@ -28,8 +28,7 @@ public class PlantSunFlower : MonoBehaviour {
 	//constants
 	const float MIN_DIST = 15.0f;
 	const float GRAND_DIST = 20.0f;
-	//for debug
-	const int STARTING_NUM = 9;
+	const int STARTING_NUM = 0;
 
 
 	// Use this for initialization
