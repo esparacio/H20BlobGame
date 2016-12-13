@@ -18,6 +18,7 @@ public class BlobPlayer : MonoBehaviour {
 	//@author Patrick Lathan
 	public AudioClip iceSound;
 	public AudioClip waterSound;
+	public AudioClip vaporSound;
 	public AudioClip jumpSound;
 	public AudioSource source;
 
@@ -62,7 +63,7 @@ public class BlobPlayer : MonoBehaviour {
 		waterParticleSystem = waterParticleObject.GetComponent<ParticleSystem>();
 
 		waterParticleObject.SetActive(true);
-        waterParticleSystem.Stop();
+		waterParticleSystem.Stop();
 
 		//@author Patrick Lathan
 		source = GetComponent<AudioSource>();
@@ -84,19 +85,19 @@ public class BlobPlayer : MonoBehaviour {
 
 	//@author Patrick Lathan
 	public void SetState(string powerString) {
-        //TODO ELIMINATE THESE IF STATEMENTS AND DO NOT SWITCH BASED ON STRINGS
-        if (powerString.Equals("water")) {
-            currentState = new WaterState(this);
-        } else if (powerString.Equals("ice")) {
-            currentState = new IceState(this);
-        } else if (powerString.Equals("vapor")) {
-            currentState = new VaporState(this);
-        } else {
-            Debug.Log("invalid power string passed to SetState");
-        }
-        currentState.Awake();
+		//TODO ELIMINATE THESE IF STATEMENTS AND DO NOT SWITCH BASED ON STRINGS
+		if (powerString.Equals("water")) {
+			currentState = new WaterState(this);
+		} else if (powerString.Equals("ice")) {
+			currentState = new IceState(this);
+		} else if (powerString.Equals("vapor")) {
+			currentState = new VaporState(this);
+		} else {
+			Debug.Log("invalid power string passed to SetState");
+		}
+		currentState.Awake();
 
-    }
+	}
 
 	//@author Patrick Lathan
 	void Update() {
@@ -116,24 +117,24 @@ public class BlobPlayer : MonoBehaviour {
 			momentumVector += (this.gameObject.transform.forward * FRICTION) * zSpeed * Time.deltaTime;
 		}
 
-        if (charController.isGrounded) {
-            // This allows players to survive any fall if they use their vapor power
-            //if (ySpeed <= BASEGRAVITY) {
-            //    Debug.Log("You Died");
-            //}
-            // Reset ySpeed so that it will not continue to increase while on a surface
-            // isGrounded WILL BREAK if ySpeed is set to 0, ySpeed MUST NOT be 0 for isGrounded to work
-            ySpeed = -.01f;
-            if (Input.GetButtonDown("Jump")) {
-                source.PlayOneShot(jumpSound);
-                ySpeed = JUMPSPEED;
-            }
-            //Slope detection needed only if the player is on the ground
-            CheckGround(new Vector3(transform.position.x, transform.position.y - (charController.height / 2) + startDistanceFromBottom, transform.position.z));
-        } else {
-            ySpeed += gravity * Time.deltaTime;
-        }
-        ySpeed = Mathf.Clamp(ySpeed, gravity, JUMPSPEED);
+		if (charController.isGrounded) {
+			// This allows players to survive any fall if they use their vapor power
+			//if (ySpeed <= BASEGRAVITY) {
+			//    Debug.Log("You Died");
+			//}
+			// Reset ySpeed so that it will not continue to increase while on a surface
+			// isGrounded WILL BREAK if ySpeed is set to 0, ySpeed MUST NOT be 0 for isGrounded to work
+			ySpeed = -.01f;
+			if ((Input.GetButtonDown("Jump"))) {
+				source.PlayOneShot(jumpSound);
+				ySpeed = JUMPSPEED;
+			}
+			//Slope detection needed only if the player is on the ground
+			CheckGround(new Vector3(transform.position.x, transform.position.y - (charController.height / 2) + startDistanceFromBottom, transform.position.z));
+		} else {
+			ySpeed += gravity * Time.deltaTime;
+		}
+		ySpeed = Mathf.Clamp(ySpeed, gravity, JUMPSPEED);
 
 		//Clamp vector magnitude ("speed") while ignoring movement on y axis
 		//Reimplement this in case of uncontrollable acceleration
@@ -228,43 +229,52 @@ public class BlobPlayer : MonoBehaviour {
 				GameObject iceCircle = Instantiate(player.icePrefab) as GameObject;
 				player.source.PlayOneShot(player.iceSound);
 
-                // Place ice in front of blob
-                iceCircle.transform.position = player.transform.position + (player.transform.forward * 5) + (player.transform.up * 2);
-                // Rotate ice slightly so that it won't accidentally fall through flat surfaces
-                iceCircle.transform.Rotate(player.transform.right, 2f);
+				// Place ice in front of blob
+				iceCircle.transform.position = player.transform.position + (player.transform.forward * 5) + (player.transform.up * 2);
+				// Rotate ice slightly so that it won't accidentally fall through flat surfaces
+				iceCircle.transform.Rotate(player.transform.right, 2f);
 			}
 		}
 
-        public override string ToString() {
-            return "ICE";
-        }
-    }
+		public override string ToString() {
+			return "ICE";
+		}
+	}
 	//@author Elena Sparacio
 	//@author Patrick Lathan
 	class VaporState : PowerState {
 		public VaporState(BlobPlayer player) : base(player) {
 		}
 
+		// Hide inherited Awake() method since gravity must be altered
+		public new void Awake() {
+			// Display current power onscreen
+			Text lowText = GameObject.Find("LowCanvas").GetComponent<Text>();
+			lowText.text = "Current Power: " + this.ToString();
+
+			// Disable water particles and sound
+			player.waterParticleSystem.Stop();
+			player.source.Stop();
+			// Enable vapor "floatiness"
+			player.gravity = VAPORGRAVITY;
+		}
+
 		public override void Update() {
-
-			if (Input.GetButton("Power")) {
-				//Lessen gravity
-				player.gravity = VAPORGRAVITY;
-
-                if (Input.GetButtonDown("Jump")) {
-                    player.ySpeed = JUMPSPEED;
-                    player.source.PlayOneShot(player.jumpSound);
-                }
-            } else {
-				//Reset gravity to normal
-				player.gravity = BASEGRAVITY;
+			if (Input.GetButton("Jump") || Input.GetButton("Power")) {
+				player.ySpeed = JUMPSPEED;
+				// Loop vapor sound after it (and all other sounds) have finished playing
+				if (!player.source.isPlaying) {
+					player.source.PlayOneShot(player.vaporSound);
+				}
+			} else {
+				player.source.Stop();
 			}
 		}
 
-        public override string ToString() {
-            return "VAPOR";
-        }
-    }
+		public override string ToString() {
+			return "VAPOR";
+		}
+	}
 
 	//@author Elena Sparacio
 	//@author Nathan Young
@@ -278,9 +288,15 @@ public class BlobPlayer : MonoBehaviour {
 
 				player.timeLeft = TIME_ACTIVE;
 
+				// Loop water sound after it (and all other sounds) have finished playing
+				if (!player.source.isPlaying) {
+					player.source.PlayOneShot(player.waterSound);
+				}
+
 				//if the water particle system is not already on, turn it on
 				if (!player.waterParticleSystem.isPlaying) {
 					player.waterParticleSystem.Play();
+					//Start water sound with particlesystem
 					player.source.PlayOneShot(player.waterSound);
 				}
 			} else {
@@ -294,8 +310,8 @@ public class BlobPlayer : MonoBehaviour {
 			}
 		}
 
-        public override string ToString() {
-            return "WATER";
-        }
-    }
+		public override string ToString() {
+			return "WATER";
+		}
+	}
 }
