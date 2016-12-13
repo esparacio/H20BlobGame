@@ -15,16 +15,15 @@ public class Water : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 
 		if (other.tag == "Player") {
-
 			StartCoroutine (YouDrowned ());
-
 		}
 	}
 		
 	//print messages telling the player that they died 
 	public IEnumerator YouDrowned() {
 		
-		yield return new WaitForSeconds(1);
+        // Allow the player to sink into the water before respawning
+		yield return new WaitForSeconds(.5f);
 		GameControl controller = GameObject.Find ("Controller").GetComponent<GameControl> ();
 		controller.YouDied ();
 

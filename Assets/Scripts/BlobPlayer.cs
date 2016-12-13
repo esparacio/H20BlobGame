@@ -222,7 +222,7 @@ public class BlobPlayer : MonoBehaviour {
                 player.source.PlayOneShot(player.iceSound);
 
                 // Place ice in front of blob
-                iceCircle.transform.position = player.transform.position + (player.transform.forward * 5) + (player.transform.up * 2);
+                iceCircle.transform.position = player.transform.position + (player.transform.forward * 5) + (player.transform.up);
                 // Rotate ice slightly so that it won't accidentally fall through flat surfaces
                 iceCircle.transform.Rotate(player.transform.right, 2f);
             }
