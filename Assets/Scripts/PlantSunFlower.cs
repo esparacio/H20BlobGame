@@ -24,6 +24,7 @@ public class PlantSunFlower : MonoBehaviour {
 	//variables for scripts
 	BlobPlayer blobPlayer;
 	SeedCounter seedCounter;
+    Vector3 grandBlobPos;
 
 	//constants
 	const float MIN_DIST = 15.0f;
@@ -37,8 +38,9 @@ public class PlantSunFlower : MonoBehaviour {
 		GameObject actualBlob = GameObject.Find ("ActualBlob");
 		blobPlayer = actualBlob.GetComponent<BlobPlayer> ();
 		seedCounter = GameObject.Find ("SeedText").GetComponent<SeedCounter> ();
+        grandBlobPos = GameObject.Find("grandpa").transform.position;
 
-		numSeeds = STARTING_NUM;
+        numSeeds = STARTING_NUM;
 		seedCounter.updateCounter (STARTING_NUM);
 		isFirst = true;
 
@@ -50,15 +52,13 @@ public class PlantSunFlower : MonoBehaviour {
 		//if the player is allowed to plant a seed, put it down in front of the player
 		if(Input.GetButtonDown("PlantSunFlower") && numSeeds>0)
 		{
-			GameObject blob = GameObject.Find ("ActualBlob");
 
 			//don't allow them to plant a water/vapor place on grandblob... 
-			GameObject grandBlob = GameObject.Find ("grandpa");
-			if (Vector3.Distance (transform.position, grandBlob.transform.position) <= GRAND_DIST) {
+			if (Vector3.Distance (transform.position, grandBlobPos) <= GRAND_DIST) {
 
 				GameObject seed = Instantiate (seedPrefab) as GameObject;
 				seed.tag = "grandpaSeed";
-				Vector3 blobPosition = blob.transform.position + (blob.transform.forward * 2);
+				Vector3 blobPosition = blobPlayer.transform.position + (blobPlayer.transform.forward * 2);
 				seed.transform.position = blobPosition;
 
 			} else {
@@ -80,7 +80,7 @@ public class PlantSunFlower : MonoBehaviour {
 					} 
 				}
 				GameObject newPlace = Instantiate (isVapor ? vaporPlacePrefab : waterPlacePrefab) as GameObject;
-				Vector3 blobPosition = blob.transform.position + (blob.transform.forward);
+				Vector3 blobPosition = blobPlayer.transform.position + (blobPlayer.transform.forward);
 				newPlace.transform.position = blobPosition;
 			}
 
@@ -118,11 +118,9 @@ public class PlantSunFlower : MonoBehaviour {
 		}
 
 		if (isFirst) {
-
 			MovieCamera movieScript = GameObject.Find ("SecondaryCamera").GetComponent<MovieCamera> ();
 			movieScript.SeedInstructions ();
 			isFirst = false;
 		}
 	}
-		
 }

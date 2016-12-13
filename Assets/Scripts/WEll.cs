@@ -12,32 +12,32 @@ Written by: Elena Sparacio and Patrick Lathan
 
 public class Well : MonoBehaviour {
 
-	private float progress;
-	private Vector3 startPos;
+    private float progress;
+    private Vector3 startPos;
     private float distanceToMove = 120f;
-	private Vector3 endPos;
-	private GameObject specialSeed;
+    private Vector3 endPos;
+    private GameObject specialSeed;
 
-	// Perform calculations in local space to make it easier to see in editor
-	void Start () {
-		specialSeed = GameObject.Find ("wellSeed");
-		startPos = specialSeed.transform.localPosition;
-		endPos = specialSeed.transform.localPosition + new Vector3(0,distanceToMove,0);
-		progress = 0;
-	}
+    // Perform calculations in local space to make it easier to see in editor
+    void Start() {
+        specialSeed = GameObject.Find("wellSeed");
+        startPos = specialSeed.transform.localPosition;
+        endPos = specialSeed.transform.localPosition + new Vector3(0, distanceToMove, 0);
+        progress = 0;
+    }
 
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update() {
 
-	}
+    }
 
-	void OnParticleCollision(GameObject particle){
+    void OnParticleCollision(GameObject particle) {
         // If a water particle collides and the specialSeed still exists, lerp it upwards
-		if (particle.tag == "waterParticle" && (specialSeed)) {
+        if (particle.tag == "waterParticle" && (specialSeed)) {
             progress += .005f;
             specialSeed.transform.localPosition = Vector3.Lerp(startPos, endPos, progress);
         }
-	}
+    }
 }
 
 

@@ -12,8 +12,6 @@ Written by: Elena Sparacio
 public class TownBlob : MonoBehaviour {
 
 	private string [] genericDialogue;
-	private static int MIN = 0;
-	private static int MAX = 9;
 
 	// Use this for initialization
 	void Start () {
@@ -31,18 +29,13 @@ public class TownBlob : MonoBehaviour {
 		genericDialogue [8] = "Excuse me, do you have a moment to talk about our lord and savior, Blobman?";
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	//When the player comes into a certain range, the town blob should then say
 	//one of the generic dialogue options to the player. 
 	void OnTriggerEnter(Collider other) {
 
 		System.Random rand = new System.Random ();
-		int random = rand.Next (MIN, MAX);
+		int random = rand.Next (0, genericDialogue.Length);
 		StoryCanvas storyScript = GameObject.Find ("StoryCanvas").GetComponent<StoryCanvas> ();
 		storyScript.Dialog (genericDialogue[random]);
 

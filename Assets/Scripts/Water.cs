@@ -11,16 +11,6 @@ Written by: Elena Sparacio
 */
 public class Water : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	//if the player hits the water, they die
 	void OnTriggerEnter(Collider other) {
 

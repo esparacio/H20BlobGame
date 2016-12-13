@@ -127,7 +127,6 @@
     <Compile Include="Assets\Scripts\StartButton.cs" />
     <Compile Include="Assets\Scripts\StoryCanvas.cs" />
     <Compile Include="Assets\Scripts\TalkToGrandpa.cs" />
-    <Compile Include="Assets\Scripts\Temperature.cs" />
     <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\Scripts\TownBlob.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
