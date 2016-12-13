@@ -36,7 +36,7 @@ public class Well : MonoBehaviour {
 	//bring the seed up when water hits the well
 	void OnParticleCollision(GameObject particle){
 
-		if (particle.tag == "water") {
+		if (particle.tag == "waterParticle") {
 			isWater = true;
 		} else {
 			isWater = false;

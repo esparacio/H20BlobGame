@@ -20,7 +20,7 @@ public class Mushroom : MonoBehaviour {
 	//increase the speed of the blade when water hits it
 	void OnParticleCollision(GameObject particle){
 
-		if (particle.tag == "water") {
+		if (particle.tag == "waterParticle") {
 			elapsedTime += 1;
 			if (elapsedTime >= 12) {
 				

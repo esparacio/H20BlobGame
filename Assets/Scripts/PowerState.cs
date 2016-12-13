@@ -10,7 +10,7 @@ public abstract class PowerState {
 		player = playerObj;
 	}
 
-    public void Awake() {
+    public virtual void Awake() {
         // Display current power onscreen
         Text lowText = GameObject.Find("LowCanvas").GetComponent<Text>();
         lowText.text = "Current Power: " + player.currentState.ToString();

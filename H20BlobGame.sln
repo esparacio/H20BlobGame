@@ -1,11 +1,11 @@
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{39D022A2-444A-CBCD-63B0-69763A77CAF4}") = "H20BlobGame", "Assembly-CSharp-firstpass.csproj", "{AA2B91EB-BA5E-17FC-8709-F7833DD6CA87}"
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2015
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H20BlobGame.CSharp.Plugins", "H20BlobGame.CSharp.Plugins.csproj", "{582486CF-C6FC-D580-F0AF-80824BF4253F}"
 EndProject
-Project("{39D022A2-444A-CBCD-63B0-69763A77CAF4}") = "H20BlobGame", "Assembly-CSharp.csproj", "{D345AD1A-EC19-3C71-36D5-BE429DC0F696}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H20BlobGame.CSharp", "H20BlobGame.CSharp.csproj", "{E184A4EF-851E-07E8-41D6-4282AD3955EA}"
 EndProject
-Project("{39D022A2-444A-CBCD-63B0-69763A77CAF4}") = "H20BlobGame", "Assembly-CSharp-Editor.csproj", "{FB4563FE-3080-DFC6-5D4B-7B3FD9D20B89}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "H20BlobGame.CSharp.Editor", "H20BlobGame.CSharp.Editor.csproj", "{4699C196-3AF4-AD81-B78A-D608A74F1F78}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,23 +13,20 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AA2B91EB-BA5E-17FC-8709-F7833DD6CA87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA2B91EB-BA5E-17FC-8709-F7833DD6CA87}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA2B91EB-BA5E-17FC-8709-F7833DD6CA87}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA2B91EB-BA5E-17FC-8709-F7833DD6CA87}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D345AD1A-EC19-3C71-36D5-BE429DC0F696}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D345AD1A-EC19-3C71-36D5-BE429DC0F696}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D345AD1A-EC19-3C71-36D5-BE429DC0F696}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D345AD1A-EC19-3C71-36D5-BE429DC0F696}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FB4563FE-3080-DFC6-5D4B-7B3FD9D20B89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FB4563FE-3080-DFC6-5D4B-7B3FD9D20B89}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FB4563FE-3080-DFC6-5D4B-7B3FD9D20B89}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FB4563FE-3080-DFC6-5D4B-7B3FD9D20B89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{582486CF-C6FC-D580-F0AF-80824BF4253F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{582486CF-C6FC-D580-F0AF-80824BF4253F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{582486CF-C6FC-D580-F0AF-80824BF4253F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{582486CF-C6FC-D580-F0AF-80824BF4253F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E184A4EF-851E-07E8-41D6-4282AD3955EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E184A4EF-851E-07E8-41D6-4282AD3955EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E184A4EF-851E-07E8-41D6-4282AD3955EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E184A4EF-851E-07E8-41D6-4282AD3955EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4699C196-3AF4-AD81-B78A-D608A74F1F78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4699C196-3AF4-AD81-B78A-D608A74F1F78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4699C196-3AF4-AD81-B78A-D608A74F1F78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4699C196-3AF4-AD81-B78A-D608A74F1F78}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = Assembly-CSharp.csproj
 	EndGlobalSection
 EndGlobal

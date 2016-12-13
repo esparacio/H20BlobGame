@@ -119,21 +119,20 @@
     <Compile Include="Assets\Scripts\MillBlade.cs" />
     <Compile Include="Assets\Scripts\MovieCamera.cs" />
     <Compile Include="Assets\Scripts\Mushroom.cs" />
+    <Compile Include="Assets\Scripts\PlaceScript.cs" />
     <Compile Include="Assets\Scripts\PlantSunFlower.cs" />
     <Compile Include="Assets\Scripts\PowerState.cs" />
     <Compile Include="Assets\Scripts\Seed.cs" />
     <Compile Include="Assets\Scripts\SeedCounter.cs" />
     <Compile Include="Assets\Scripts\StartButton.cs" />
-    <Compile Include="Assets\Scripts\StateTest.cs" />
     <Compile Include="Assets\Scripts\StoryCanvas.cs" />
     <Compile Include="Assets\Scripts\TalkToGrandpa.cs" />
     <Compile Include="Assets\Scripts\Temperature.cs" />
     <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\Scripts\TownBlob.cs" />
-    <Compile Include="Assets\Scripts\VaporPlace.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
-    <Compile Include="Assets\Scripts\WaterPlace.cs" />
     <Compile Include="Assets\Scripts\Well.cs" />
+    <Compile Include="Assets\Scripts\WorldWall.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\AssetStoreAssets\Free_Rocks\Standard Assets\Skyboxes\_skybox info.txt" />

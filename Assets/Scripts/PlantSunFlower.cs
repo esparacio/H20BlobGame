@@ -67,7 +67,7 @@ public class PlantSunFlower : MonoBehaviour {
 				bool isVapor = false;
 
                 //Find all existing waterPlaces
-				GameObject[] waterPlaces = GameObject.FindGameObjectsWithTag ("waterPlace");
+				GameObject[] waterPlaces = GameObject.FindGameObjectsWithTag ("water");
 
 				foreach (GameObject waterPlace in waterPlaces) {
                     // Detect if blob is in range of existing water place

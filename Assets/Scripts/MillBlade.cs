@@ -33,7 +33,7 @@ public class MillBlade : MonoBehaviour {
 		
 		DoorOpen script = GameObject.Find ("door1").GetComponent<DoorOpen> ();
 
-		if (particle.tag == "water") {
+		if (particle.tag == "waterParticle") {
 			speed += 1;
 			//open the gate if the speed is great enough
 			if (speed >= 12) {
