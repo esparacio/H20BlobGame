@@ -74,10 +74,10 @@ public class MovieCamera : MonoBehaviour {
 	//sets the camera back to being focused on the player
 	public void SetCharCam(){
 
-		isBegin = false;
+		Cursor.visible = false;
 
-		//unlock cursor
-		Cursor.visible = true;
+		isBegin = false;
+	
 		//unlock controls 
 		GameObject blob = GameObject.Find("ActualBlob");
 		CharacterController control = blob.GetComponent<CharacterController> ();
@@ -115,8 +115,8 @@ public class MovieCamera : MonoBehaviour {
 	//sets the camera to the movie mode, where the player cannot interact
 	public void SetMovieCam(){
 
-		//lock cursor
 		Cursor.visible = false;
+
 		//lock controls 
 		GameObject blob = GameObject.Find("ActualBlob");
 		CharacterController control = blob.GetComponent<CharacterController> ();
@@ -137,9 +137,6 @@ public class MovieCamera : MonoBehaviour {
 	//startAnimation is the first cutscene of the game. It introduces the player
 	//to the world. 
 	public void startAnimation(){
-
-		//don't allow the player to move the cursor
-		Cursor.visible = false;
 
 		//Print introduction
 		string [] messages = new string[8];
@@ -172,9 +169,7 @@ public class MovieCamera : MonoBehaviour {
 	//grandpaCutscene is the second cutscene of the game. It is a conversation between Grandblob and
 	//the player blob. 
 	public void grandpaCutscene(){
-
-		Cursor.visible = false;
-
+		
 		storyScript.setSkip (false);
 
 		//Print grandblob scene
@@ -229,8 +224,6 @@ public class MovieCamera : MonoBehaviour {
 	//this is the third cutscene of the game. It sets the scene and tells the player how to save
 	//their Grandblob
 	public void LibraryCutscene(){
-
-		Cursor.visible = false;
 
 		storyScript.setSkip (false);
 
@@ -314,8 +307,6 @@ public class MovieCamera : MonoBehaviour {
 
 	//this plays the final sequence of the game where Grandblob is saved
 	public void EndingSequence(){
-
-		Cursor.visible = false;
 
 		storyScript.setSkip (false);
 

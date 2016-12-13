@@ -106,6 +106,7 @@
      <Compile Include="Assets\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\WaterPlace.cs" />
      <Compile Include="Assets\Scripts\Well.cs" />
+     <Compile Include="Assets\Scripts\WorldWall.cs" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />

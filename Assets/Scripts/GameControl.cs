@@ -30,8 +30,12 @@ public class GameControl : MonoBehaviour {
 		//closes the game
 		if (Input.GetButtonDown ("Cancel")) {
 
-			print ("Close game.");
-			Application.Quit ();
+			//pause the game and give the user a cursor
+			Time.timeScale = 0;
+			Cursor.visible = true;
+			Cursor.lockState = CursorLockMode.Confined; 
+
+			//create the pause menu 
 
 		} 
 	
@@ -46,6 +50,9 @@ public class GameControl : MonoBehaviour {
 		actualBlob.transform.position = startPos;
 		GameObject blob = GameObject.Find ("NewBlob");
 		MeshRenderer renderer = blob.GetComponent<MeshRenderer>();
+		//give him the right starting powers (ice) 
+		BlobPlayer blobPlayer = GameObject.Find ("ActualBlob").GetComponent<BlobPlayer> ();
+		blobPlayer.SetState("ice");
 		//Make blob reappear and enable controls
 		renderer.enabled=true;
 		control.enabled = true;
