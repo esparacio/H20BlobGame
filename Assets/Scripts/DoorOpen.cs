@@ -11,31 +11,38 @@ Written by: Patrick Lathan and Nathan Young
 */
 public class DoorOpen : MonoBehaviour {
 
-	private float angle;
 	private float progress;
-	private float startPos;
+	private float closedAngle;
+    private float openAngle;
+    private bool complete = false;
 
-	// Use this for initialization
-	void Start () {
-		startPos = transform.eulerAngles.y - 360;
-		angle = transform.eulerAngles.y;
+    private float doorSpeed = .005f;
+    private float amountToOpen = 110;
+
+    // Use this for initialization
+    void Start () {
+		closedAngle = transform.localEulerAngles.y - 360;
+        openAngle = closedAngle + amountToOpen;
 		progress = 0;
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {
 
-		//always lerp the door until it is closed
-		progress -= .005f;
+        // If the door is open, check to see if the seed is taken. If so, open it and stop checking.
+        if (progress > 0 && !complete) {
+            complete = !(GameObject.Find("MillSeed"));
+            progress -= doorSpeed;
+        } else {
+            doorOpenAndClose();
+        }
 		progress = Mathf.Clamp (progress, 0, 1);
-		angle = Mathf.Lerp (startPos, 90, progress);
-		this.gameObject.transform.localEulerAngles = new Vector3 (0, angle, 0);
-	}
+		gameObject.transform.localEulerAngles = new Vector3(0, Mathf.Lerp(closedAngle, openAngle, progress), 0);
+    }
 
 	//This opens the door all the way and restarts the lerp
 	public void doorOpenAndClose(){
-		angle = 90;
-		progress = 1;
+		progress += (doorSpeed * 4);
 	}
 
 }

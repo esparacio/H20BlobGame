@@ -217,14 +217,10 @@ public class BlobPlayer : MonoBehaviour {
         public override void Update() {
 
             if (Input.GetButtonDown("Power")) {
-
-                GameObject iceCircle = Instantiate(player.icePrefab) as GameObject;
+                // Place ice in front and above blob
+                Vector3 icePosition = (player.transform.position + (player.transform.forward * 5) + (player.transform.up));
+                Instantiate(player.icePrefab, icePosition, Quaternion.Euler(0, 0, 0));
                 player.source.PlayOneShot(player.iceSound);
-
-                // Place ice in front of blob
-                iceCircle.transform.position = player.transform.position + (player.transform.forward * 5) + (player.transform.up);
-                // Rotate ice slightly so that it won't accidentally fall through flat surfaces
-                iceCircle.transform.Rotate(player.transform.right, 2f);
             }
         }
 
