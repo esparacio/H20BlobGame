@@ -130,7 +130,6 @@
     <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
     <Compile Include="Assets\Scripts\TownBlob.cs" />
     <Compile Include="Assets\Scripts\Water.cs" />
-    <Compile Include="Assets\Scripts\Well.cs" />
     <Compile Include="Assets\Scripts\WorldWall.cs" />
   </ItemGroup>
   <ItemGroup>
