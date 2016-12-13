@@ -34,18 +34,13 @@ public class GameControl : MonoBehaviour {
 			Application.Quit ();
 
 		} 
-
-		//respawns character
-		if (Input.GetButtonDown ("Oops")) {
-			Oops ();
-		}
 	
 	}
 
 	//Oops is a method that respawns a character once they die
 	public void Oops(){
 		//play a message
-		storyScript.PrintCenterMessage ("Oops!", 3);
+		storyScript.PrintCenterMessage ("Oops! You died. Be careful! Blobs only have 24325 lives.", 5);
 		//Find blob and respawn him
 		GameObject actualBlob = GameObject.Find ("ActualBlob");
 		actualBlob.transform.position = startPos;
@@ -66,9 +61,10 @@ public class GameControl : MonoBehaviour {
 		MeshRenderer renderer = blob.GetComponent<MeshRenderer>();
 		renderer.enabled=false;
 
-		//play the message and disable controls
-		storyScript.PrintCenterMessage("...you... Died...",3);
+		//disable controls
 		control.enabled = false;
+		//respawn the player
+		Oops ();
 
 
 	}

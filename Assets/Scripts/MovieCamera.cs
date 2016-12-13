@@ -48,7 +48,7 @@ public class MovieCamera : MonoBehaviour {
 		}
 
 		//skip animation if enter/return key is pressed
-		if (Input.GetKeyDown("enter")||(Input.GetKeyDown("return")))
+		if (Input.GetKeyDown("="))
 		{
 			storyScript.setSkip (true);
 		}

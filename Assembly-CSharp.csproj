@@ -97,16 +97,15 @@
      <Compile Include="Assets\Scripts\Seed.cs" />
      <Compile Include="Assets\Scripts\SeedCounter.cs" />
      <Compile Include="Assets\Scripts\StartButton.cs" />
-     <Compile Include="Assets\Scripts\StateTest.cs" />
      <Compile Include="Assets\Scripts\StoryCanvas.cs" />
      <Compile Include="Assets\Scripts\TalkToGrandpa.cs" />
      <Compile Include="Assets\Scripts\Temperature.cs" />
      <Compile Include="Assets\Scripts\ThirdPersonCamera.cs" />
      <Compile Include="Assets\Scripts\TownBlob.cs" />
      <Compile Include="Assets\Scripts\VaporPlace.cs" />
-     <Compile Include="Assets\Scripts\WEll.cs" />
      <Compile Include="Assets\Scripts\Water.cs" />
      <Compile Include="Assets\Scripts\WaterPlace.cs" />
+     <Compile Include="Assets\Scripts\Well.cs" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\NoiseEffectShaderRGB.shader" />
@@ -190,7 +189,7 @@
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendForBloom.shader" />
  <Reference Include="Assembly-UnityScript-firstpass">
- <HintPath>/Users/ElenaSparacio/Documents/College/Senior_Year/Fall_2016/Game Programming/Projects/Executables/H20BlobGame/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
+ <HintPath>/Users/ElenaSparacio/Documents/College/Senior_Year/Fall_2016/Game Programming/Projects/H20Blob/H20BlobGame/Library/ScriptAssemblies/Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -111,7 +111,7 @@ public class TalkToGrandpa : MonoBehaviour {
 	void YouWin(){
 
 		//destroy all the seeds
-		GameObject[] seeds = GameObject.FindGameObjectsWithTag("seed");
+		GameObject[] seeds = GameObject.FindGameObjectsWithTag("grandpaSeed");
 		foreach (GameObject seedObj in seeds) {
 			Destroy(seedObj);
 		}

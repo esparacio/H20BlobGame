@@ -28,7 +28,8 @@ public class PlantSunFlower : MonoBehaviour {
 	//constants
 	const float MIN_DIST = 15.0f;
 	const float GRAND_DIST = 20.0f;
-	const int STARTING_NUM = 0;
+	//for debug
+	const int STARTING_NUM = 9;
 
 
 	// Use this for initialization
@@ -93,8 +94,7 @@ public class PlantSunFlower : MonoBehaviour {
 	//GotASeed is called when the player picks up a seed. It increments the amount of seeds
 	//they currently have. If it is the first collected seed, it plays instructions
 	public void GotASeed(GameObject aSeed){
-
-	
+		
 		if (aSeed.tag == "waterSeed") {
 			Destroy (aSeed.transform.parent.gameObject);
 			//if the water place is destroyed, on trigger exit is NOT called, but we need to
@@ -125,4 +125,5 @@ public class PlantSunFlower : MonoBehaviour {
 			isFirst = false;
 		}
 	}
+		
 }

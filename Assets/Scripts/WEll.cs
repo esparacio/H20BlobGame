@@ -18,9 +18,9 @@ public class Well : MonoBehaviour {
 		endPos = 5f;
 		progress = 0;
 		isWater = false;
-	
+
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -30,12 +30,12 @@ public class Well : MonoBehaviour {
 			specialSeed.transform.position = new Vector3 (specialSeed.transform.position.x,currentPos,specialSeed.transform.position.z);
 
 		}
-	
+
 	}
 
 	//bring the seed up when water hits the well
 	void OnParticleCollision(GameObject particle){
-		
+
 		if (particle.tag == "water") {
 			isWater = true;
 		} else {
@@ -43,3 +43,5 @@ public class Well : MonoBehaviour {
 		}
 	}
 }
+
+

@@ -82,7 +82,8 @@ public class ThirdPersonCamera : MonoBehaviour {
             progress += .05f;
         }
         progress = Mathf.Clamp(progress, .5f, 1);
-        transform.position = Vector3.Lerp(player.transform.position, targetPosition, progress);
+		//commented out for testing
+        //transform.position = Vector3.Lerp(player.transform.position, targetPosition, progress);
     }
 
     // Camera LERPing concept from http://answers.unity3d.com/questions/14693/stop-camera-from-going-trough-walls.html
