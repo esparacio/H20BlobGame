@@ -1,46 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+/*
+
+WorldWall notifies players that they have hit the map boundary.
+
+Written by: Elena Sparacio and Patrick Lathan
+(C) 2016
+
+*/
+
 public class Well : MonoBehaviour {
 
 	private float progress;
-	private float startPos;
-	private float endPos;
+	private Vector3 startPos;
+    private float distanceToMove = 120f;
+	private Vector3 endPos;
 	private GameObject specialSeed;
-	private bool isWater;
 
-	// Use this for initialization
+	// Perform calculations in local space to make it easier to see in editor
 	void Start () {
-
 		specialSeed = GameObject.Find ("wellSeed");
-		startPos = specialSeed.transform.position.y;
-		//hardcoded end position (YIPES) 
-		endPos = 5f;
+		startPos = specialSeed.transform.localPosition;
+		endPos = specialSeed.transform.localPosition + new Vector3(0,distanceToMove,0);
 		progress = 0;
-		isWater = false;
-
 	}
 
 	// Update is called once per frame
 	void Update () {
 
-		if ((isWater)&&(specialSeed)) {
-			progress += .005f;
-			float currentPos = Mathf.Lerp (startPos, endPos, progress);
-			specialSeed.transform.position = new Vector3 (specialSeed.transform.position.x,currentPos,specialSeed.transform.position.z);
-
-		}
-
 	}
 
-	//bring the seed up when water hits the well
 	void OnParticleCollision(GameObject particle){
-
-		if (particle.tag == "waterParticle") {
-			isWater = true;
-		} else {
-			isWater = false;
-		}
+        // If a water particle collides and the specialSeed still exists, lerp it upwards
+		if (particle.tag == "waterParticle" && (specialSeed)) {
+            progress += .005f;
+            specialSeed.transform.localPosition = Vector3.Lerp(startPos, endPos, progress);
+        }
 	}
 }
 
