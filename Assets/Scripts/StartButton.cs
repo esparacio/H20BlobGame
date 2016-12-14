@@ -7,6 +7,8 @@ using System.Collections;
 StartButton is the script that goes with the main menu. It allows
 you to the start or quit the game. 
 
+Would love to eventually incorporate load/save game in the future. 
+
 Written by: Elena Sparacio
 (C) 2016
 

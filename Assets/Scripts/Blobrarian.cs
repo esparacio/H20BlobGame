@@ -22,11 +22,6 @@ public class Blobrarian : MonoBehaviour {
 		cutscene = false; 
 
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	//setCutscene is called to the set whether or not the first cutscene has been played
 	public void setCutscene(bool isTrue){

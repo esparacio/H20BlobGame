@@ -13,10 +13,6 @@ Written by: Elena Sparacio
 */
 public class Controls : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -34,12 +30,12 @@ public class Controls : MonoBehaviour {
 
 		Text uiText = this.gameObject.GetComponent<Text> ();
 		uiText.text = "~~~CONTROLS~~~ \n Use w, a, s, d to move and space to jump.\n" +
-			"Click to use your powers.\n" +
-			"Press shift to plant a power-changing plant. \n" +
-			"1 plant gives you water powers.\n" +
-			"2 plants in the same spot gives you vapor powers. \n" +
-			"Press 'E' to pick up an already planted plant. \n" + 
-			"Press 'O' for the Oops! button.";
+		"Click to use your powers.\n" +
+		"Press 'E' to pick up a power-changing plant.\n" +
+		"Press shift to plant a power-changing plant. \n" +
+		"1 plant gives you water powers.\n" +
+		"2 plants in the same spot gives you vapor powers.";
+		
 		yield return new WaitForSeconds(aTime);
 		uiText.text = "Press 'c' to show controls";
 

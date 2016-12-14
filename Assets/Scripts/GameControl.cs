@@ -3,7 +3,8 @@ using System.Collections;
 
 /*
 
-Controller class 
+Controller class for methods that don't have to do specifically 
+with any one GameObject - currently only DEATH
 
 By: Elena Sparacio
 
@@ -21,23 +22,6 @@ public class GameControl : MonoBehaviour {
 		storyScript = GameObject.Find ("StoryCanvas").GetComponent<StoryCanvas> ();
 		startPos = GameObject.Find ("ActualBlob").transform.position;
 		control = GameObject.Find("ActualBlob").GetComponent<CharacterController> ();
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-		//closes the game
-		if (Input.GetButtonDown ("Cancel")) {
-
-			//pause the game and give the user a cursor
-			Time.timeScale = 0;
-			Cursor.visible = true;
-			Cursor.lockState = CursorLockMode.Confined; 
-
-			//create the pause menu 
-
-		} 
 	
 	}
 

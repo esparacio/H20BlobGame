@@ -6,6 +6,9 @@ using System.Collections;
 
 MovieCamera is the script that deals with all the cutscenes in the game.
 
+NOTE: The hope is to refactor this code so that it reads
+all cutscenes from a file, but this is for a future verison. 
+
 Written by: Elena Sparacio
 (C) 2016
 

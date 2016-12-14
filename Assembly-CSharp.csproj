@@ -92,6 +92,7 @@
      <Compile Include="Assets\Scripts\MillBlade.cs" />
      <Compile Include="Assets\Scripts\MovieCamera.cs" />
      <Compile Include="Assets\Scripts\Mushroom.cs" />
+     <Compile Include="Assets\Scripts\PauseCanvas.cs" />
      <Compile Include="Assets\Scripts\PlaceScript.cs" />
      <Compile Include="Assets\Scripts\PlantSunFlower.cs" />
      <Compile Include="Assets\Scripts\PowerState.cs" />
@@ -131,7 +132,6 @@
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\_Antialiasing\FXAAPreset3.shader" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\FisheyeShader.shader" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Apply.shader" />
-     <None Include="Assets\AssetStoreAssets\Free_Rocks\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\frag_ao.cginc" />
      <None Include="Assets\AssetStoreAssets\Stykized Vegetation Pack Free\Readme.txt" />
      <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ToonShading\Shaders\ToonBasicOutline.shader" />

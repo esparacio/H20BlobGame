@@ -21,7 +21,8 @@ public abstract class PowerState {
 
     // Default Awake() method wipes changes from other states
     public virtual void Awake() {
-        // Display current power onscreen
+		//this little bit by Elena :) 
+        // Display current power onscreen 
         Text lowText = GameObject.Find("LowCanvas").GetComponent<Text>();
         lowText.text = "Current Power: " + player.currentState.ToString();
 

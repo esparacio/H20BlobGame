@@ -77,7 +77,7 @@ public class TalkToGrandpa : MonoBehaviour {
 	}
 
 	//This checks if the player is close to grandblob, and if the player uses ice powers, 
-	//it kills grandblob :( Also checks for if 10 seeds are around him, leading to him being 
+	//it makes grandblob cold :( Also checks for if 10 seeds are around him, leading to him being 
 	//unfrozen 
 	void CheckObjectsAroundHim(){
 
