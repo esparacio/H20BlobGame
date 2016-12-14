@@ -3,7 +3,7 @@ using System.Collections;
 
 /*
 
-ThirdPersonCamera is the script that deals with camera movement. 
+ThirdPersonCamera is the script that deals with camera movement around the character. 
 
 Written by: Patrick Lathan
 (C) 2016
@@ -54,8 +54,9 @@ public class ThirdPersonCamera : MonoBehaviour {
         // Vertical movement moves the camera around the playermodel in an arc within specified bounds
 
         // Get player input, modify by vertical sensitivity, and invert
-        float xRot = Input.GetAxis("Mouse Y") * sensitivityVert * Time.deltaTime * -1;
+        float xRot = (Input.GetAxis("Mouse Y") + Input.GetAxis("Joystick Y")) * sensitivityVert * Time.deltaTime * -1;
 
+        // Limit rotation around x axis
         if (!(xRot > 0 && transform.localPosition.y <= maxAndMinVert && transform.localPosition.z > 0) && !(xRot < 0 && transform.localPosition.y <= maxAndMinVert && transform.localPosition.z < 0)) {
             // Rotate camera around the player's x axis at the player's position
             transform.RotateAround(player.transform.position, player.transform.right, xRot);
@@ -65,7 +66,7 @@ public class ThirdPersonCamera : MonoBehaviour {
         // Horizontal movement rotates the actual playermodel so that powers will always be cast from the "front"
 
         // Get player input and modify by horizontal sensitivity
-        float yRot = player.transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivityHor * Time.deltaTime;
+        float yRot = player.transform.localEulerAngles.y + (Input.GetAxis("Mouse X") + Input.GetAxis("Joystick X")) * sensitivityHor * Time.deltaTime;
         // Get current player rotation
         float currentXRot = player.transform.localEulerAngles.x;
         // Modify player rotation
@@ -75,7 +76,7 @@ public class ThirdPersonCamera : MonoBehaviour {
         RaycastHit hit;
         if (Physics.Linecast(player.transform.position, (transform.position), out hit)) {
             string hitTag = hit.collider.gameObject.tag;
-            if (hitTag != "Player" && hitTag != "seed") {
+            if (hitTag != "Player" && hitTag != "seed" && hitTag != "secondCamera") {
                 currentDistance = hit.distance;
             }
 

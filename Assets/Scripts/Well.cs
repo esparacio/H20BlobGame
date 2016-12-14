@@ -3,7 +3,7 @@ using System.Collections;
 
 /*
 
-WorldWall notifies players that they have hit the map boundary.
+Well is attached the the Well object and raises a seed when water particles collide with it.
 
 Written by: Elena Sparacio and Patrick Lathan
 (C) 2016

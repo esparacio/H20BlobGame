@@ -6,7 +6,7 @@ using System.Collections;
 
 Seed is the script that is attached to a seed in the game.
 
-Written by: Elena Sparacio
+Written by: Elena Sparacio and Patrick Lathan
 (C) 2016
 
 */
@@ -21,24 +21,18 @@ public class Seed : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         if (collectable && Input.GetButtonDown("Collect")) {
-            // TODO display "press e to collect seed" onscreen
             SeedCollected();
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
 	//if the player hits the seed, allow it to be collected
 	void OnTriggerEnter(Collider other) {
-        //TODO should we collect non-planted seeds automatically?
-        //TODO should we display a message whenever any seed is in range?
         if (other.tag == "Player") {
             StoryCanvas storyScript = GameObject.Find("StoryCanvas").GetComponent<StoryCanvas>();
             storyScript.PrintCenterMessage("Press E to collect a seed", 5);
             collectable = true;
         }
-
-		//&&(this.gameObject.tag == "seed")
-
 
 	}
 
@@ -55,7 +49,7 @@ public class Seed : MonoBehaviour {
 	
 		//add a seed to the seed counter in another script
 		PlantSunFlower seedScript = GameObject.Find ("ActualBlob").GetComponent<PlantSunFlower> ();
-		seedScript.GotASeed (this.gameObject);
+		seedScript.GotASeed (gameObject);
 
 	}
 		

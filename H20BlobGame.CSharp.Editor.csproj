@@ -121,7 +121,6 @@
     <Compile Include="Assets\AssetStoreAssets\NatureStarterKit2\Editor\ImageEffects\VignetteAndChromaticAberrationEditor.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\AssetStoreAssets\Free_Rocks\Standard Assets\Skyboxes\_skybox info.txt" />
     <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\GlassRefraction\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\BlendModesOverlay.shader" />
     <None Include="Assets\AssetStoreAssets\NatureStarterKit2\Standard Assets\Effects\ImageEffects\Shaders\BlurEffectConeTaps.shader" />

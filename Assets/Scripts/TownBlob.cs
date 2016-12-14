@@ -38,7 +38,5 @@ public class TownBlob : MonoBehaviour {
 		int random = rand.Next (0, genericDialogue.Length);
 		StoryCanvas storyScript = GameObject.Find ("StoryCanvas").GetComponent<StoryCanvas> ();
 		storyScript.Dialog (genericDialogue[random]);
-
 	}
-
 }

@@ -6,7 +6,7 @@ using System.Collections;
 PlantSunFlower is the script attached to the player that allows it to plant 
 seeds.
 
-Written by: Nathan Young and Elena Sparacio
+Written by: Nathan Young, Elena Sparacio and Patrick Lathan
 (C) 2016
 
 */

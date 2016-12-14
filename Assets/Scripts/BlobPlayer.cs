@@ -2,20 +2,25 @@
 using UnityEngine.UI;
 using System;
 
+/*
+
+BlobPlayer handles all powers and player movement including sliding down slopes 
+
+Written by: Patrick Lathan, Elena Sparacio and Nathan Young
+(C) 2016
+
+*/
+
 public class BlobPlayer : MonoBehaviour {
 
-    //@author Nathan Young
     private GameObject waterParticleObject;
     public ParticleSystem waterParticleSystem;
-
-    //Also see particle system setting: start lifetime
     public const float TIME_ACTIVE = 1f;
 
     //http://answers.unity3d.com/questions/225213/c-countdown-timer.html
     private float timeLeft; //time left for power on
     private bool waterIsActive;
 
-    //@author Patrick Lathan
     public AudioClip iceSound;
     public AudioClip waterSound;
     public AudioClip vaporSound;
@@ -30,8 +35,8 @@ public class BlobPlayer : MonoBehaviour {
     private const float MOMENTUMDECAY = 1.05f;
 
     public float gravity;
-
     private float ySpeed;
+    private Vector3 momentumVector;
 
     private CharacterController charController;
 
@@ -39,7 +44,6 @@ public class BlobPlayer : MonoBehaviour {
 
     public PowerState currentState;
 
-    private Vector3 momentumVector;
 
     //http://thehiddensignal.com/unity-angle-of-sloped-ground-under-player/
     [Header("Results")]
@@ -47,7 +51,7 @@ public class BlobPlayer : MonoBehaviour {
     public Vector3 groundSlopeDir = Vector3.zero;  // The calculated slope as a vector
 
     [Header("Settings")]
-    public bool showDebug = false;                  // Show debug gizmos and lines
+    public bool showDebug = true;                  // Show debug gizmos and lines
     public LayerMask castingMask;                  // Layer mask for casts. You'll want to ignore the player.
     public float startDistanceFromBottom = 0.5f;   // Should probably be higher than skin width
     public float sphereCastRadius = 0.25f;
@@ -58,14 +62,11 @@ public class BlobPlayer : MonoBehaviour {
     public Vector3 rayOriginOffset2 = new Vector3(0.2f, 0f, -0.16f);
 
     void Start() {
-        //@author Nathan Young
         waterParticleObject = GameObject.Find("WaterParticleSystem");
         waterParticleSystem = waterParticleObject.GetComponent<ParticleSystem>();
-
         waterParticleObject.SetActive(true);
         waterParticleSystem.Stop();
 
-        //@author Patrick Lathan
         source = GetComponent<AudioSource>();
 
         charController = GetComponent<CharacterController>();
@@ -83,9 +84,7 @@ public class BlobPlayer : MonoBehaviour {
         SetState("ice");
     }
 
-    //@author Patrick Lathan
     public void SetState(string powerString) {
-        //TODO ELIMINATE THESE IF STATEMENTS AND DO NOT SWITCH BASED ON STRINGS
         if (powerString.Equals("water")) {
             currentState = new WaterState(this);
         } else if (powerString.Equals("ice")) {
@@ -96,10 +95,8 @@ public class BlobPlayer : MonoBehaviour {
             Debug.Log("invalid power string passed to SetState");
         }
         currentState.Awake();
-
     }
 
-    //@author Patrick Lathan
     void Update() {
         // Perform movement at the beginning of the step to avoid resetting ySpeed if it was altered by the current state
         if (charController.enabled) {
@@ -158,7 +155,6 @@ public class BlobPlayer : MonoBehaviour {
 
         // SPHERECAST
         // "Casts a sphere along a ray and returns detailed information on what was hit."
-        //THESE CONDITIONS ARE NEVER SATISFIED
         if (Physics.SphereCast(origin, sphereCastRadius, Vector3.down, out hit, sphereCastDistance, castingMask)) {
             // Angle of our slope (between these two vectors).
             // A hit normal is at a 90 degree angle from the surface that is collided with (at the point of collision).
@@ -205,11 +201,10 @@ public class BlobPlayer : MonoBehaviour {
                 groundSlopeAngle = average;
             }
         }
-        //Debug.Log(groundSlopeAngle);
+        // Make it more difficult but not impossible to climb mountains
+        groundSlopeDir *= (groundSlopeAngle * .1f);
     }
 
-    //@author Elena Sparacio
-    //@author Patrick Lathan
     class IceState : PowerState {
         public IceState(BlobPlayer player) : base(player) {
         }
@@ -228,8 +223,7 @@ public class BlobPlayer : MonoBehaviour {
             return "ICE";
         }
     }
-    //@author Elena Sparacio
-    //@author Patrick Lathan
+
     class VaporState : PowerState {
         public VaporState(BlobPlayer player) : base(player) {
         }
@@ -265,8 +259,6 @@ public class BlobPlayer : MonoBehaviour {
         }
     }
 
-    //@author Elena Sparacio
-    //@author Nathan Young
     class WaterState : PowerState {
         public WaterState(BlobPlayer player) : base(player) {
         }

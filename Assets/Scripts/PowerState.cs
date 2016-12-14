@@ -1,6 +1,15 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/*
+
+PowerState is the abstract class extended by the PowerState inner classes in BlobPlayer.
+
+Written by: Patrick Lathan
+(C) 2016
+
+*/
+
 public abstract class PowerState {
 
 	// A reference to the containing class.
@@ -10,6 +19,7 @@ public abstract class PowerState {
 		player = playerObj;
 	}
 
+    // Default Awake() method wipes changes from other states
     public virtual void Awake() {
         // Display current power onscreen
         Text lowText = GameObject.Find("LowCanvas").GetComponent<Text>();

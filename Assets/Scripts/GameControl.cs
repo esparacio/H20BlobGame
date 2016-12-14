@@ -3,7 +3,7 @@ using System.Collections;
 
 /*
 
-Unfinished controller class 
+Controller class 
 
 By: Elena Sparacio
 
@@ -42,6 +42,7 @@ public class GameControl : MonoBehaviour {
 	}
 
 	//Oops is a method that respawns a character once they die
+    //Included for debugging purposes
 	public void Oops(){
 		//play a message
 		storyScript.PrintCenterMessage ("Oops! You died. Be careful! Blobs only have 24325 lives.", 5);

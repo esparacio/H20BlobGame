@@ -5,7 +5,7 @@ using System.Collections;
 
 PlaceScript is attached to water and vapor places created by planting seeds
 
-By: Nathan Young and Elena Sparacio
+By: Nathan Young, Elena Sparacio and Patrick Lathan
 
 image credits: https://upload.wikimedia.org/wikipedia/commons/c/c4/Fire_Texture_01.png
 

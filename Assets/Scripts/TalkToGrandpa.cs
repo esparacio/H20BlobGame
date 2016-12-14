@@ -3,9 +3,9 @@ using System.Collections;
 
 /*
 
-TalkToGranpa is the script that is attached to Grandblob
+TalkToGrandpa is the script that is attached to Grandblob
 
-Written by: Elena Sparacio and Patrick Lathan
+Written by: Elena Sparacio
 (C) 2016
 
 */

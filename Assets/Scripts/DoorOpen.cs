@@ -16,7 +16,7 @@ public class DoorOpen : MonoBehaviour {
     private float openAngle;
     private bool complete = false;
 
-    private float doorSpeed = .005f;
+    private float doorSpeed = .5f;
     private float amountToOpen = 110;
 
     // Use this for initialization
@@ -33,21 +33,17 @@ public class DoorOpen : MonoBehaviour {
         if (complete) {
             doorOpenAndClose();
         } else {
-            // If statement to increase efficiency
-            if (progress > 0) {
-                // If MillSeed can't be found, puzzle complete
-                complete = !(GameObject.Find("MillSeed"));
-                //TODO time.deltatime
-                progress -= doorSpeed;
-            }
+            // If MillSeed can't be found, puzzle complete
+            complete = !(GameObject.Find("MillSeed"));
+            progress -= (doorSpeed * Time.deltaTime);
         }
 		progress = Mathf.Clamp (progress, 0, 1);
 		gameObject.transform.localEulerAngles = new Vector3(0, Mathf.Lerp(closedAngle, openAngle, progress), 0);
     }
 
-	//This opens the door all the way and restarts the lerp
+	//This opens the door partially
 	public void doorOpenAndClose(){
-		progress += (doorSpeed * 4);
+		progress += (doorSpeed * Time.deltaTime * 4);
 	}
 
 }

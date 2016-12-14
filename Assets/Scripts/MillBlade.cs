@@ -13,12 +13,9 @@ public class MillBlade : MonoBehaviour {
 
 	//the speed at which the blade is spinning
 	private float speed;
-
     private float speedCap = 20f;
-
-    private float speedDecay = 0.97f;
-
     private float speedThreshold = 15f;
+    private float speedDecay = 2;
 
 	// Use this for initialization
 	void Start () {
@@ -28,11 +25,9 @@ public class MillBlade : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		//rotate the blade based upon the speed
-		Mathf.Clamp (speed,0,speedCap);
-        //TODO time.deltatime
-		speed *= speedDecay;
-		this.gameObject.transform.Rotate (0,0,speed);
+        //rotate the blade based upon the speed
+        speed = Mathf.Clamp (speed - (Time.deltaTime * speedDecay), 0,speedCap);
+		gameObject.transform.Rotate (0,0,speed);
 	}
 
 	//increase the speed of the blade when water hits it
@@ -41,7 +36,7 @@ public class MillBlade : MonoBehaviour {
 		DoorOpen script = GameObject.Find ("door1").GetComponent<DoorOpen> ();
 
 		if (particle.tag == "waterParticle") {
-			speed += 1;
+			speed += (Time.deltaTime + 1);
 			//open the gate if the speed is great enough
 			if (speed >= speedThreshold) {
 				script.doorOpenAndClose ();

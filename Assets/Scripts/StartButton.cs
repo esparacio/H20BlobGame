@@ -13,16 +13,6 @@ Written by: Elena Sparacio
 */
 public class StartButton : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	//Load the scene upon start
 	public void startGame(){
 
@@ -35,8 +25,6 @@ public class StartButton : MonoBehaviour {
 
 		print ("Bye bye");
 		Application.Quit ();
-	
-
 
 	}
 }
