@@ -29,12 +29,17 @@ public class DoorOpen : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        // If the door is open, check to see if the seed is taken. If so, open it and stop checking.
-        if (progress > 0 && !complete) {
-            complete = !(GameObject.Find("MillSeed"));
-            progress -= doorSpeed;
-        } else {
+        // If the seed has been collected, keep the door open
+        if (complete) {
             doorOpenAndClose();
+        } else {
+            // If statement to increase efficiency
+            if (progress > 0) {
+                // If MillSeed can't be found, puzzle complete
+                complete = !(GameObject.Find("MillSeed"));
+                //TODO time.deltatime
+                progress -= doorSpeed;
+            }
         }
 		progress = Mathf.Clamp (progress, 0, 1);
 		gameObject.transform.localEulerAngles = new Vector3(0, Mathf.Lerp(closedAngle, openAngle, progress), 0);
