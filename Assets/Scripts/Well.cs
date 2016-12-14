@@ -26,11 +26,6 @@ public class Well : MonoBehaviour {
         progress = 0;
     }
 
-    // Update is called once per frame
-    void Update() {
-
-    }
-
     void OnParticleCollision(GameObject particle) {
         // If a water particle collides and the specialSeed still exists, lerp it upwards
         if (particle.tag == "waterParticle" && (specialSeed)) {
